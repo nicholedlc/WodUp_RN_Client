@@ -1,0 +1,3 @@
+rootProject.name = 'WodUp_RN_Client'
+
+include ':app'
