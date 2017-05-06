@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ListView, View, Text } from 'react-native';
-import CardSection from './CardSection';
-import Header from './Header';
+import { Header } from './common';
 
 export default class ExercisesIndex extends Component {
   constructor (props) {
