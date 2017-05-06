@@ -3,14 +3,11 @@ import {
   AppRegistry,
   View
 } from 'react-native';
-import Header from './src/components/Header';
 import ExercisesIndex from './src/components/ExercisesIndex';
-
 
 const App = () => {
   return (
     <View>
-      <Header headerText='WODUP!'/>
       <ExercisesIndex />
     </View>
   );

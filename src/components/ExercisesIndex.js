@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ListView, View, Text } from 'react-native';
 import CardSection from './CardSection';
+import Header from './Header';
 
 export default class ExercisesIndex extends Component {
   constructor (props) {
     super (props);
     this.state = {
-      exercises: []
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     }
   }
 
   getExercises () {
     fetch('http://localhost:3636/api/exercises')
       .then(response => response.json())
-      .then(({ exercises }) => this.setState({ exercises }))
+      .then(responseData => {
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(responseData.exercises)
+        });
+      })
       .catch(console.info)
   }
 
-  renderExercises () {
-    this.state.exercises.map((e, i) => {
-      return (
-        <CardSection >
-          <Text key={`exercise ${i}`}>
-            {e.name}
-          </Text>
-        </CardSection>
-      );
-    })
+  renderExercise (exercise) {
+    return (
+      <CardSection>
+        <Text>{exercise.name}</Text>
+      </CardSection>
+    );
   }
 
   componentWillMount () {
@@ -35,17 +36,13 @@ export default class ExercisesIndex extends Component {
 
   render () {
     return (
-      <ScrollView>
-        {this.state.exercises.map((e, i) => {
-          return (
-            <CardSection key={`exercise ${i}`}>
-              <Text>
-                {e.name}
-              </Text>
-            </CardSection>
-          );
-        })}
-      </ScrollView>
+      <View>
+        <Header headerText='WODUP!'/>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderExercise}
+        />
+      </View>
     );
   }
 }
