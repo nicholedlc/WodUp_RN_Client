@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
+import { exercises, exercisesErrored, exercisesLoading } from './ExercisesIndex';
 
 export default combineReducers({
-  exercises: () => [1,2,3]
+  exercises,
+  exercisesErrored,
+  exercisesLoading
 });

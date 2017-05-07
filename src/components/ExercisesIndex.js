@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 import { ListView, View, Text } from 'react-native';
-import { Header } from './common';
+import { connect } from 'react-redux';
+import { fetchExercises } from '../actions';
+import { Header, CardSection, Spinner, ErrorMessage } from './common';
 
-export default class ExercisesIndex extends Component {
-  constructor (props) {
-    super (props);
-    this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    }
-  }
-
-  getExercises () {
-    fetch('http://localhost:3636/api/exercises')
-      .then(response => response.json())
-      .then(responseData => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.exercises)
-        });
-      })
-      .catch(console.info)
+class ExercisesIndex extends Component {
+  componentDidMount () {
+    this.props.fetchExercises('http://localhost:3636/api/exercises');
+    // this.dataSource = ds.cloneWithRows(this.props.exercises);
   }
 
   renderExercise (exercise) {
@@ -29,19 +18,42 @@ export default class ExercisesIndex extends Component {
     );
   }
 
-  componentWillMount () {
-    return this.getExercises();
-  }
-
   render () {
+    const { exercises = [], exercisesErrored, exercisesLoading } = this.props;
+    if (exercisesErrored) {
+      return <ErrorMessage />
+    }
+    if (exercisesLoading) {
+      return <Spinner />
+    }
     return (
       <View>
         <Header headerText='WODUP!'/>
         <ListView
-          dataSource={this.state.dataSource}
+          dataSource={this.props.exercises}
           renderRow={this.renderExercise}
         />
       </View>
     );
   }
 }
+
+const ds = new ListView.DataSource({
+  rowHasChanged: (r1, r2) => r1 !== r2
+});
+
+const mapStateToProps = state => {
+  return {
+    exercises: ds.cloneWithRows(state.exercises),
+    exercisesErrored: state.exercisesErrored,
+    exercisesLoading: state.exercisesLoading
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchExercises: url => dispatch(fetchExercises(url))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExercisesIndex);
