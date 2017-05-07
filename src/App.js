@@ -1,13 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducers from './reducers';
+import configureStore from './store/configureStore';
 import ExercisesIndex from './components/ExercisesIndex';
+
+const store = configureStore(); // can also pass an initial state here
 
 const App = () => {
   return (
-    <Provider store={createStore(reducers)}>
+    <Provider store={store}>
       <ExercisesIndex />
     </Provider>
   );
