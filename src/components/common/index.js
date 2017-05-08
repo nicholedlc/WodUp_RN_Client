@@ -1,4 +1,5 @@
 export * from './CardSection';
-export * from './Header';
+export * from './TopNav';
 export * from './Spinner';
 export * from './ErrorMessage';
+export * from './BottomNav';

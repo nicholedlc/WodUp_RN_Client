@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { ListView, View, Text } from 'react-native';
+import { ListView, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { Container } from 'native-base';
 import { fetchExercises } from '../actions';
-import { Header, CardSection, Spinner, ErrorMessage } from './common';
+import { TopNav, CardSection, Spinner, ErrorMessage, BottomNav } from './common';
 
 class ExercisesIndex extends Component {
   componentDidMount () {
@@ -27,13 +28,17 @@ class ExercisesIndex extends Component {
       return <Spinner />
     }
     return (
-      <View>
-        <Header headerText='WODUP!'/>
-        <ListView
-          dataSource={this.props.exercises}
-          renderRow={this.renderExercise}
-        />
-      </View>
+      <Container>
+        <TopNav headerText='WODUP!' />
+        <Container style={{flex: 1}}>
+          <ListView
+            dataSource={this.props.exercises}
+            renderRow={this.renderExercise}
+            enableEmptySections
+          />
+        </Container>
+        <BottomNav />
+      </Container>
     );
   }
 }
