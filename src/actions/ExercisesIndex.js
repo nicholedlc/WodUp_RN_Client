@@ -1,24 +1,24 @@
-import { 
+import {
   EXERCISES_SUCCEEDED,
   EXERCISES_LOADING,
   EXERCISES_ERRORED
 } from './types';
 
-export const exercisesErrored = bool => { //remove export because these functions are not used outside of this file
+const exercisesErrored = bool => {
   return {
-    type: EXERCISES_ERRORED, // add in a TYPE file
+    type: EXERCISES_ERRORED,
     errored: bool
   };
 };
 
-export const exercisesLoading = bool => {
+const exercisesLoading = bool => {
   return {
     type: EXERCISES_LOADING,
     loading: bool
   };
 };
 
-export const exercisesSucceeded = exercises => {
+const exercisesSucceeded = exercises => {
   return {
     type: EXERCISES_SUCCEEDED,
     exercises
@@ -39,12 +39,12 @@ export const fetchExercises = (url) => {
       })
       .then(response => response.json())
       .then(({exercises}) => {
-        dispatch(exercisesLoading(false)); //should handle changing of state in the reducer!!!
+        dispatch(exercisesLoading(false));
         return dispatch(exercisesSucceeded(exercises));
       })
       .catch((errorMessage) => {
         console.info(errorMessage);
-        return dispatch(exercisesErrored(true)); //should handle changing of state in the reducer!!!
+        return dispatch(exercisesErrored(true));
       })
   };
 }

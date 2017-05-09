@@ -6,17 +6,17 @@ import { selectExercise } from '../actions';
 
 class ExerciseItem extends Component {
   render () {
-    const { id, name } = this.props.exercise;
+    const { exercise } = this.props;
     const { titleStyle } = styles;
 
     return (
       <TouchableWithoutFeedback
-        onPress={() => this.props.selectExercise(id)}
+        onPress={() => this.props.selectExercise(exercise)}
       >
         <View>
           <CardSection>
             <Text style={titleStyle}>
-              {name}
+              {exercise.name}
             </Text>
           </CardSection>
         </View>
@@ -35,7 +35,7 @@ const styles = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectExercise: exerciseId => dispatch(selectExercise(exerciseId))
+    selectExercise: exercise => dispatch(selectExercise(exercise))
   }
 }
 

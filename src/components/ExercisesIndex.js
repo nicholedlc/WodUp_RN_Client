@@ -25,7 +25,6 @@ class ExercisesIndex extends Component {
     }
     return (
       <Container>
-        <TopNav headerText='WODUP!' />
         <Container style={{flex: 1}}>
           <ListView
             dataSource={this.props.exercises}
