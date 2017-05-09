@@ -8,7 +8,7 @@ class ExerciseItem extends Component {
   render () {
     const { exercise } = this.props;
     const { titleStyle } = styles;
-
+    
     return (
       <TouchableWithoutFeedback
         onPress={() => this.props.selectExercise(exercise)}

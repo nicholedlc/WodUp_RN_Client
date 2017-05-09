@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 class ShowExercise extends Component {
   componentDidMount () {
-    
+
   }
 
   render () {
-    console.log(this.props.exercise);
+    console.log(this.props.exercise.exercise.name);
     return (
       <View>
         <Text>{this.props.exercise.name}</Text>

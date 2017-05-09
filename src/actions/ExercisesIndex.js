@@ -4,17 +4,10 @@ import {
   EXERCISES_ERRORED
 } from './types';
 
-const exercisesErrored = bool => {
+const exercisesErrored = errorMessage => {
   return {
     type: EXERCISES_ERRORED,
-    errored: bool
-  };
-};
-
-const exercisesLoading = bool => {
-  return {
-    type: EXERCISES_LOADING,
-    loading: bool
+    errored: errorMessage
   };
 };
 
@@ -25,10 +18,10 @@ const exercisesSucceeded = exercises => {
   };
 };
 
-export const fetchExercises = (url) => {
+export const fetchExercises = url => {
   console.log(url); // http://localhost:3636/api/exercises
-  return (dispatch) => {
-    dispatch(exercisesLoading(true));
+  return dispatch => {
+    dispatch({ type: EXERCISES_LOADING });
 
     fetch(url)
       .then(response => {
@@ -39,12 +32,11 @@ export const fetchExercises = (url) => {
       })
       .then(response => response.json())
       .then(({exercises}) => {
-        dispatch(exercisesLoading(false));
         return dispatch(exercisesSucceeded(exercises));
       })
       .catch((errorMessage) => {
         console.info(errorMessage);
-        return dispatch(exercisesErrored(true));
+        return dispatch(exercisesErrored(errorMessage))
       })
   };
 }
