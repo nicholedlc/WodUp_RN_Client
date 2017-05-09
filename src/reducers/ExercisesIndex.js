@@ -1,6 +1,12 @@
-export const exercisesErrored = (state = false, action) => {
+import {
+  EXERCISES_SUCCEEDED,
+  EXERCISES_LOADING,
+  EXERCISES_ERRORED
+} from '../actions/types';
+
+ export const exercisesErrored = (state = false, action) => {
   switch(action.type) {
-    case 'EXERCISES_ERRORED':
+    case EXERCISES_ERRORED:
       return action.errored;
     default:
       return state;
@@ -9,7 +15,7 @@ export const exercisesErrored = (state = false, action) => {
 
 export const exercisesLoading = (state = false, action) => {
   switch(action.type) {
-    case 'EXERCISES_LOADING':
+    case EXERCISES_LOADING:
       return action.loading;
     default:
       return state;
@@ -18,7 +24,7 @@ export const exercisesLoading = (state = false, action) => {
 
 export const exercises = (state = [], action) => {
   switch(action.type) {
-    case 'EXERCISES_SUCCEEDED':
+    case EXERCISES_SUCCEEDED:
       return action.exercises;
     default:
       return state;
