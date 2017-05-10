@@ -1,3 +1,3 @@
-export * from './ExercisesIndex';
-export * from './ExerciseItem';
-export * from './ShowExercise';
+export * from './ExercisesIndexAction';
+export * from './ExerciseItemAction';
+export * from './ShowExerciseAction';

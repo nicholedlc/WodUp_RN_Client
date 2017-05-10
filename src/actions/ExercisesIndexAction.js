@@ -1,20 +1,20 @@
 import {
   EXERCISES_SUCCEEDED,
   EXERCISES_LOADING,
-  EXERCISES_ERRORED
+  EXERCISES_FAILED
 } from './types';
-
-const exercisesErrored = errorMessage => {
-  return {
-    type: EXERCISES_ERRORED,
-    errored: errorMessage
-  };
-};
 
 const exercisesSucceeded = exercises => {
   return {
     type: EXERCISES_SUCCEEDED,
     exercises
+  };
+};
+
+const exercisesFailed = errorMessage => {
+  return {
+    type: EXERCISES_FAILED,
+    errored: errorMessage
   };
 };
 
@@ -31,12 +31,10 @@ export const fetchExercises = url => {
         return response;
       })
       .then(response => response.json())
-      .then(({exercises}) => {
-        return dispatch(exercisesSucceeded(exercises));
-      })
-      .catch((errorMessage) => {
+      .then(({exercises}) => dispatch(exercisesSucceeded(exercises)))
+      .catch(errorMessage => {
         console.info(errorMessage);
-        return dispatch(exercisesErrored(errorMessage))
-      })
+        return dispatch(exercisesFailed(errorMessage))
+      });
   };
-}
+};

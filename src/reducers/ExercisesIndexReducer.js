@@ -1,7 +1,7 @@
 import {
   EXERCISES_SUCCEEDED,
   EXERCISES_LOADING,
-  EXERCISES_ERRORED
+  EXERCISES_FAILED
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
-    case EXERCISES_ERRORED:
+    case EXERCISES_FAILED:
       return { ...state, errorred: action.errored, loading: false };
     case EXERCISES_LOADING:
       return { ...state, errored: '', loading: true };
