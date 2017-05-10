@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { CardSection } from './common';
+import { ListView, View, Text, Image } from 'react-native';
+import { BottomNav } from './common';
 import { connect } from 'react-redux';
+import { Container } from 'native-base';
 import { fetchLogs } from '../actions';
+
+const BASE_URL = 'http://localhost:3636';
 
 class ShowExercise extends Component {
   static defaultProps = {
@@ -10,37 +13,53 @@ class ShowExercise extends Component {
   }
 
   componentDidMount () {
-    this.props.fetchLogs(`http://localhost:3636/api/exercises/${this.props.exercise.id}`)
+    this.props.fetchLogs(`${BASE_URL}/api/exercises/${this.props.exercise.id}`)
+  }
+
+  renderLog (log) {
+    console.log(`${BASE_URL}${log.imageUrl}`);
+    return (
+      <View>
+        <Text>Date: {log.date}</Text>
+        <Text>Rep: {log.rep}</Text>
+        <Text>Set: {log.set}</Text>
+        <Text>Weight: {log.weight}</Text>
+        <Text>Note: {log.note}</Text>
+        <Image
+          style={{width: 100, height: 100}}
+          source={{uri: `${BASE_URL}/${log.imageUrl}`}} />
+      </View>
+    );
   }
 
   render () {
+    console.log(this.props);
     const { exercise, logs } = this.props;
     return (
-      <View>
-        <CardSection>
+      <Container>
+        <Container style={{flex: 1}}>
           <Text>{exercise.name}</Text>
-        </CardSection>
-
-        {this.props.logs.map((l, i) => {
-          return (
-            <View key={`log ${i}`}>
-              <Text>Date: {l.date}</Text>
-              <Text>Rep: {l.rep}</Text>
-              <Text>Set: {l.set}</Text>
-              <Text>Weight: {l.weight}</Text>
-            </View>
-          );
-        })}
-      </View>
+          <ListView
+            dataSource={logs}
+            renderRow={this.renderLog}
+            enableEmptySections
+          >
+          </ListView>
+        </Container>
+        <BottomNav />
+      </Container>
     )
   };
 }
 
+const ds = new ListView.DataSource({
+  rowHasChanged: (r1,r2) => r1 !== r2
+});
+
 const mapStateToProps = state => {
-  // console.log(state.showExercise.exercise.log);
   return {
     exercise: state.exercise,
-    logs: state.showExercise.exercise.log
+    logs: ds.cloneWithRows(state.showExercise.exercise.log || []),
   };
 };
 
