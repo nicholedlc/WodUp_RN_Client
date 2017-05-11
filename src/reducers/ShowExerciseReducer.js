@@ -7,17 +7,17 @@ import {
 const INITIAL_STATE = {
   exercise: {},
   loading: false,
-  errored: ''
+  errorMessage: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case LOGS_FAILED:
-      return { ... state, errored: action.errored, loading: false };
+      return { ... state, errorMessage: action.errorMessage, loading: false };
     case LOGS_LOADING:
-      return { ...state, errored: '', loading: true };
+      return { ...state, errorMessage: '', loading: true };
     case LOGS_SUCCEEDED:
-      return { ...state, errored: '', loading: false, ...action.logs };
+      return { ...state, errorMessage: '', loading: false, ...action.logs };
     default:
       return state;
   };

@@ -14,7 +14,7 @@ const logsSucceeded = logs => {
 const logsFailed = errorMessage => {
   return {
     type: LOGS_FAILED,
-    errored: errorMessage
+    errorMessage
   }
 }
 

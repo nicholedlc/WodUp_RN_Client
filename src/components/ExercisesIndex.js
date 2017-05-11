@@ -16,8 +16,8 @@ class ExercisesIndex extends Component {
   }
 
   render () {
-    const { exercises, errored, loading } = this.props;
-    if (errored) {
+    const { exercises, errorMessage, loading } = this.props;
+    if (errorMessage) {
       return <ErrorMessage />
     }
     if (loading) {
@@ -43,10 +43,10 @@ const ds = new ListView.DataSource({
 });
 
 const mapStateToProps = state => {
-  const { exercises, errored, loading } = state.exercisesIndex;
+  const { exercises, errorMessage, loading } = state.exercisesIndex;
   return {
     exercises: ds.cloneWithRows(exercises),
-    errored,
+    errorMessage,
     loading
   };
 };

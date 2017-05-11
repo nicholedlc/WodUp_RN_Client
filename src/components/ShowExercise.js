@@ -19,8 +19,8 @@ class ShowExercise extends Component {
 
   render () {
     console.log(this.props);
-    const { exercise, logs, errored, loading } = this.props;
-    if (errored) {
+    const { exercise, logs, errorMessage, loading } = this.props;
+    if (errorMessage) {
       return <ErrorMessage />;
     }
     if (loading) {
@@ -52,11 +52,11 @@ const ds = new ListView.DataSource({
 });
 
 const mapStateToProps = state => {
-  const { exercise: { logs }, errored, loading } = state.showExercise;
+  const { exercise: { logs }, errorMessage, loading } = state.showExercise;
   return {
     exercise: state.exercise,
     logs: ds.cloneWithRows(logs || []),
-    errored,
+    errorMessage,
     loading
   };
 };

@@ -14,7 +14,7 @@ const exercisesSucceeded = exercises => {
 const exercisesFailed = errorMessage => {
   return {
     type: EXERCISES_FAILED,
-    errored: errorMessage
+    errorMessage
   };
 };
 
@@ -25,12 +25,9 @@ export const fetchExercises = url => {
 
     fetch(url)
       .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response;
+        if (!response.ok) throw Error(response.statusText);
+        return response.json();
       })
-      .then(response => response.json())
       .then(({exercises}) => dispatch(exercisesSucceeded(exercises)))
       .catch(errorMessage => {
         console.info(errorMessage);
