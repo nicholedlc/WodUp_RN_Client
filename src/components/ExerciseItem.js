@@ -7,15 +7,15 @@ import { selectExercise } from '../actions';
 class ExerciseItem extends Component {
   render () {
     const { exercise } = this.props;
-    const { titleStyle } = styles;
-    
+    const { textStyle } = styles;
+
     return (
       <TouchableWithoutFeedback
         onPress={() => this.props.selectExercise(exercise)}
       >
         <View>
           <CardSection>
-            <Text style={titleStyle}>
+            <Text style={textStyle}>
               {exercise.name}
             </Text>
           </CardSection>
@@ -26,7 +26,7 @@ class ExerciseItem extends Component {
 };
 
 const styles = {
-  titleStyle: {
+  textStyle: {
     color: '#696969',
     fontSize: 15,
     paddingLeft: 15

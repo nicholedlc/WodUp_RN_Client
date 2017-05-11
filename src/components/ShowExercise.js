@@ -1,44 +1,38 @@
 import React, { Component } from 'react';
-import { ListView, View, Text, Image } from 'react-native';
-import { BottomNav } from './common';
+import { ListView, View, Text } from 'react-native';
+import { BottomNav, CardSection, Spinner, ErrorMessage } from './common';
 import { connect } from 'react-redux';
 import { Container } from 'native-base';
 import { fetchLogs } from '../actions';
+import ShowLog from './ShowLog';
 
 const BASE_URL = 'http://localhost:3636';
 
 class ShowExercise extends Component {
-  static defaultProps = {
-    logs: []
-  }
-
   componentDidMount () {
     this.props.fetchLogs(`${BASE_URL}/api/exercises/${this.props.exercise.id}`)
   }
 
   renderLog (log) {
-    console.log(`${BASE_URL}${log.imageUrl}`);
-    return (
-      <View>
-        <Text>Date: {log.date}</Text>
-        <Text>Rep: {log.rep}</Text>
-        <Text>Set: {log.set}</Text>
-        <Text>Weight: {log.weight}</Text>
-        <Text>Note: {log.note}</Text>
-        <Image
-          style={{width: 100, height: 100}}
-          source={{uri: `${BASE_URL}/${log.imageUrl}`}} />
-      </View>
-    );
+    return <ShowLog log={log} />;
   }
 
   render () {
     console.log(this.props);
-    const { exercise, logs } = this.props;
+    const { exercise, logs, errored, loading } = this.props;
+    if (errored) {
+      return <ErrorMessage />;
+    }
+    if (loading) {
+      return <Spinner />;
+    }
     return (
       <Container>
-        <Container style={{flex: 1}}>
+        <CardSection>
           <Text>{exercise.name}</Text>
+        </CardSection>
+
+        <Container style={{flex: 1}}>
           <ListView
             dataSource={logs}
             renderRow={this.renderLog}
@@ -46,6 +40,7 @@ class ShowExercise extends Component {
           >
           </ListView>
         </Container>
+
         <BottomNav />
       </Container>
     )
@@ -57,9 +52,12 @@ const ds = new ListView.DataSource({
 });
 
 const mapStateToProps = state => {
+  const { exercise: { logs }, errored, loading } = state.showExercise;
   return {
     exercise: state.exercise,
-    logs: ds.cloneWithRows(state.showExercise.exercise.log || []),
+    logs: ds.cloneWithRows(logs || []),
+    errored,
+    loading
   };
 };
 

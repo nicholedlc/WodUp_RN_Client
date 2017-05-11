@@ -31,7 +31,7 @@ export const fetchLogs = url => {
         return response;
       })
       .then(response => response.json())
-      .then(log => dispatch(logsSucceeded(log)))
+      .then(logs => dispatch(logsSucceeded(logs)))
       .catch(errorMessage => {
         console.info(errorMessage);
         return dispatch(logsFailed(errorMessage))
