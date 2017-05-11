@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Text, TouchableHighlight, View, Image } from 'react-native';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { CardSection } from './common';
 import { showLogInfo } from '../actions';
+
 
 class ShowLog extends Component {
   expandContent () {
@@ -10,13 +12,16 @@ class ShowLog extends Component {
     if(expanded) {
       return (
         <CardSection>
-          <Text>Rep: {rep}</Text>
-          <Text>Set: {set}</Text>
-          <Text>Weight: {weight}</Text>
-          <Text>Note: {note}</Text>
-          <Image
-            style={{width: 100, height: 100}}
-            source={{uri: `http://localhost:3636${imageUrl}`}} />
+          <View>
+            <Text>Rep {rep}</Text>
+            <Text>Set {set}</Text>
+            <Text>Weight {weight}</Text>
+            <Text>Note {note}</Text>
+            <Text>Image</Text>
+            <Image
+              style={{width: 100, height: 100}}
+              source={{uri: `http://localhost:3636${imageUrl}`}} />
+          </View>
         </CardSection>
       );
     }
@@ -24,15 +29,15 @@ class ShowLog extends Component {
 
   render () {
     const { id, date } = this.props.log;
-    console.log(this.props);
+    const exerciseDate = moment(Date.parse(date)).format('dddd, MMMM Do YYYY');
     return (
       <TouchableHighlight
         onPress={() => this.props.showLogInfo(id)}
       >
         <View>
           <CardSection>
-            <Text style={styles.textStyle}>
-              Date:{date}
+            <Text style={styles.listStyle}>
+              {exerciseDate}
             </Text>
           </CardSection>
           {this.expandContent()}
@@ -43,10 +48,13 @@ class ShowLog extends Component {
 }
 
 const styles = {
-  textStyle: {
+  listStyle: {
     color: '#696969',
     fontSize: 15,
     paddingLeft: 15
+  },
+  contentStyle: {
+
   }
 }
 
