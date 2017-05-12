@@ -1,8 +1,11 @@
-import { CREATE_NEW_LOG } from './types';
+import {
+  INPUT_LOG,
+} from './types';
 
-export const createNewLog = (bool) => {
+export const inputLog = ({ key, val }) => {
+  console.log({ key, val })
   return {
-    type: CREATE_NEW_LOG,
-    bool
+    type: INPUT_LOG,
+    payload: { key, val }
   }
 }

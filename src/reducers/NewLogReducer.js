@@ -1,9 +1,18 @@
-import { CREATE_NEW_LOG } from '../actions/types';
+import { INPUT_LOG } from '../actions/types';
 
-export default (state = null, action) => {
+const INITIAL_STATE = {
+  date: new Date(),
+  rep: null,
+  set: null,
+  weight: null,
+  note: null
+}
+
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CREATE_NEW_LOG:
-      return action.bool;
+    case INPUT_LOG:
+      console.log(action.payload.key, action.payload.val)
+      return { ...state, [action.payload.key]: action.payload.val };
     default:
       return state;
   }

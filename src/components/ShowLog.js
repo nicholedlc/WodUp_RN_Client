@@ -29,7 +29,7 @@ class ShowLog extends Component {
 
   render () {
     const { id, date } = this.props.log;
-    const exerciseDate = moment(Date.parse(date)).format('dddd, MMMM Do YYYY');
+    const exerciseDate = moment(Date.parse(date)).format('ddd, MMMM Do YYYY');
     return (
       <TouchableHighlight
         onPress={() => this.props.showLogInfo(id)}

@@ -4,7 +4,7 @@ import exercise from './ExerciseItemReducer';
 import showExercise from './ShowExerciseReducer';
 import logId from './ShowLogReducer';
 import newExercise from './NewExerciseReducer';
-import bool from './NewLogReducer';
+import newLog from './NewLogReducer';
 
 export default combineReducers({
   exercisesIndex,
@@ -12,5 +12,5 @@ export default combineReducers({
   showExercise,
   logId,
   newExercise,
-  bool
+  newLog
 });

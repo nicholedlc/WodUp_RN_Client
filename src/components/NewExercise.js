@@ -5,8 +5,8 @@ import { BottomNav } from './common';
 import { inputExercise, createExercise } from '../actions';
 
 class NewExercise extends Component {
-  onTextInput (text) {
-    this.props.inputExercise(text)
+  onTextInput (value) {
+    this.props.inputExercise(value)
   }
 
   onButtonPress () {
@@ -19,10 +19,10 @@ class NewExercise extends Component {
       <Container>
         <Content>
           <Form style={styles.formStyle}>
-            <Item stackedLabel>
+            <Item floatingLabel>
               <Label>Exercise</Label>
-              <Input
-                value={text}
+              <Input value={text}
+                autoCorrect={false}
                 onChangeText={this.onTextInput.bind(this)} />
             </Item>
           </Form>
