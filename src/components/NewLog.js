@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DatePickerIOS } from 'react-native';
+import { DatePickerIOS, View, Image } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
 import moment from 'moment';
 import { CardSection, BottomNav } from './common';
 import { inputLog, createLog } from '../actions';
+import PickImage from './PickImage';
 
 class NewLog extends Component {
   onButtonPress () {
     const { id, date, rep, set, weight, note } = this.props;
-    this.props.createLog({ id, date, rep, set, weight, note });
+    this.props.createLog({ id, date, rep, set, weight, note, image });
+  }
+
+  renderImage () {
+    const { uri } = this.props;
+    if (uri !== null) {
+      return (
+        <View style={styles.imageViewStyle}>
+          <Image source={{uri}} style={styles.imageStyle} />
+        </View>
+      );
+    }
   }
 
   render () {
     console.log(this.props);
-    const { name, date, rep, set, weight, note, inputLog } = this.props;
+    const { name, inputLog, date, rep, set, weight, note } = this.props;
     return (
       <Container>
         <CardSection>
@@ -74,7 +86,13 @@ class NewLog extends Component {
                 onChangeText={val => inputLog({ key: 'note', val})}
               />
             </Item>
+            <Content padder />
+
+            <PickImage />
           </Form>
+
+          <Content padder />
+          {this.renderImage()}
           <Content padder />
 
           <Button block info
@@ -96,27 +114,34 @@ class NewLog extends Component {
 
 const styles = {
   buttonStyle: {
+    flex: 0,
     marginLeft: 15,
     marginRight: 15
   },
   formStyle: {
-    marginRight: 15
+    marginRight: 15,
   },
   noteStyle: {
     height: 115,
     paddingTop: 15,
     paddingBottom: 15
+  },
+  imageViewStyle: {
+    marginLeft: 15,
+  },
+  imageStyle: {
+    height: 345,
+    width: 345
   }
 }
 
 const mapStateToProps = state => {
   console.log(state);
   const {
-    newLog: { date, rep, set, weight, note },
+    newLog: { date, rep, set, weight, note, uri },
     exercise: { name, id }
   } = state;
-  // console.log({ name, date, rep, set, weight, note });
-  return { name, date, rep, set, weight, note };
+  return { name, date, rep, set, weight, note, uri };
 };
 
 export default connect(mapStateToProps, { inputLog, createLog })(NewLog);
