@@ -51,6 +51,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow users to upload pictures and videos from photo library in to the app</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow users to take pictures and videos and add to the app</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow users to include audio in video recordings</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
