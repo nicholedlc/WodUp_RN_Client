@@ -2,6 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { Container } from 'native-base';
+
+import Router from './Router';
 import configureStore from './store/configureStore';
 import ExercisesIndex from './components/ExercisesIndex';
 
@@ -11,7 +13,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Container>
-        <ExercisesIndex />
+        <Router />
       </Container>
     </Provider>
   );

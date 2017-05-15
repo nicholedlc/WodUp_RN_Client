@@ -1,10 +1,16 @@
 import { combineReducers } from 'redux';
-import { exercises, exercisesErrored, exercisesLoading } from './ExercisesIndex';
-import { exerciseId } from './ExerciseItem';
+import exercisesIndex from './ExercisesIndexReducer';
+import exercise from './ExerciseItemReducer';
+import showExercise from './ShowExerciseReducer';
+import logId from './ShowLogReducer';
+import newExercise from './NewExerciseReducer';
+import newLog from './NewLogReducer';
 
 export default combineReducers({
-  exercises,
-  exercisesErrored,
-  exercisesLoading,
-  exerciseId
+  exercisesIndex,
+  exercise,
+  showExercise,
+  logId,
+  newExercise,
+  newLog
 });

@@ -6,17 +6,17 @@ import { selectExercise } from '../actions';
 
 class ExerciseItem extends Component {
   render () {
-    const { id, name } = this.props.exercise;
-    const { titleStyle } = styles;
+    const { exercise } = this.props;
+    const { textStyle } = styles;
 
     return (
       <TouchableWithoutFeedback
-        onPress={() => this.props.selectExercise(id)}
+        onPress={() => this.props.selectExercise(exercise)}
       >
         <View>
           <CardSection>
-            <Text style={titleStyle}>
-              {name}
+            <Text style={textStyle}>
+              {exercise.name}
             </Text>
           </CardSection>
         </View>
@@ -26,7 +26,7 @@ class ExerciseItem extends Component {
 };
 
 const styles = {
-  titleStyle: {
+  textStyle: {
     color: '#696969',
     fontSize: 15,
     paddingLeft: 15
@@ -35,7 +35,7 @@ const styles = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectExercise: exerciseId => dispatch(selectExercise(exerciseId))
+    selectExercise: exercise => dispatch(selectExercise(exercise))
   }
 }
 

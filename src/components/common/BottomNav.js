@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Content, Footer, FooterTab, Button, Icon, Text } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 const BottomNav = () => {
   return (
     <Container style={{flex: 0, height: 55.5}}>
@@ -10,7 +11,9 @@ const BottomNav = () => {
               <Icon name="person" />
               <Text>Profile</Text>
             </Button>
-            <Button vertical>
+            <Button vertical
+              onPress={() => Actions.exercisesIndex()}
+            >
               <Icon name="speedometer" />
               <Text>Track</Text>
             </Button>
