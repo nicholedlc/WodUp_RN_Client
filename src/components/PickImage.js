@@ -18,13 +18,11 @@ const options = {
 class PickImage extends Component {
   onButtonPress () {
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
       if (response.didCancel) {
-        console.log ('User cancelled image picker');
+        console.warn ('User cancelled image picker');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        console.error(response.error);
       }
-      // Can also display the image using data: { uri: 'data:image/jpeg;base64,' + response.data };
       this.props.pickImage(response.uri);
     });
   }

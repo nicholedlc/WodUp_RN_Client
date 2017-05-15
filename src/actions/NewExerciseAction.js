@@ -39,7 +39,6 @@ export const createExercise = name => {
       body: JSON.stringify({ name })
     })
     .then(response => {
-      console.info(response);
       if(!response.ok) throw Error(response.statusText);
       return response.json();
     })
@@ -48,7 +47,7 @@ export const createExercise = name => {
       Actions.exercisesIndex();
     })
     .catch(errorMessage => {
-      console.info(errorMessage);
+      console.error(errorMessage);
       return dispatch(newExerciseFailed(errorMessage))
     })
   }

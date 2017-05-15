@@ -19,7 +19,6 @@ const exercisesFailed = errorMessage => {
 };
 
 export const fetchExercises = url => {
-  console.log(url); // http://localhost:3636/api/exercises
   return dispatch => {
     dispatch({ type: EXERCISES_LOADING });
 
@@ -30,7 +29,7 @@ export const fetchExercises = url => {
       })
       .then(({exercises}) => dispatch(exercisesSucceeded(exercises)))
       .catch(errorMessage => {
-        console.info(errorMessage);
+        console.error(errorMessage);
         return dispatch(exercisesFailed(errorMessage))
       });
   };
