@@ -60,7 +60,6 @@ const styles = {
 
 const mapStateToProps = (state, ownProps) => {
   const expanded = state.logId === ownProps.log.id;
-  console.log(expanded);
   return { expanded }
 }
 

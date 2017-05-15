@@ -18,7 +18,6 @@ class ShowExercise extends Component {
   }
 
   render () {
-    console.log(this.props);
     const { exercise, logs, errorMessage, loading } = this.props;
     if (errorMessage) {
       return <ErrorMessage />;

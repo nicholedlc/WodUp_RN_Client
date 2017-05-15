@@ -13,7 +13,6 @@ const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action.type, action.text)
   switch(action.type) {
     case INPUT_EXERCISE:
       return { ...state, text: action.text}

@@ -19,7 +19,7 @@ const logsFailed = errorMessage => {
 }
 
 export const fetchLogs = url => {
-  console.log(url); // http://localhost:3636/api/exercises/:id
+  console.log('fetching logs', url); // http://localhost:3636/api/exercises/:id
   return dispatch => {
     dispatch({ type: LOGS_LOADING });
 

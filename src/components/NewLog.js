@@ -9,8 +9,8 @@ import PickImage from './PickImage';
 
 class NewLog extends Component {
   onButtonPress () {
-    const { id, date, rep, set, weight, note } = this.props;
-    this.props.createLog({ id, date, rep, set, weight, note, image });
+    const { createLog, id, date, rep, set, weight, note, uri } = this.props;
+    createLog({ id, date, rep, set, weight, note, uri });
   }
 
   renderImage () {
@@ -25,7 +25,6 @@ class NewLog extends Component {
   }
 
   render () {
-    console.log(this.props);
     const { name, inputLog, date, rep, set, weight, note } = this.props;
     return (
       <Container>
@@ -97,7 +96,7 @@ class NewLog extends Component {
 
           <Button block info
             style={styles.buttonStyle}
-            // onPress={(this.onButtonPress.bind(this))}
+            onPress={() => this.onButtonPress()}
           >
             <Text>
               Submit
@@ -136,12 +135,11 @@ const styles = {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   const {
     newLog: { date, rep, set, weight, note, uri },
     exercise: { name, id }
   } = state;
-  return { name, date, rep, set, weight, note, uri };
+  return { name, id, date, rep, set, weight, note, uri };
 };
 
 export default connect(mapStateToProps, { inputLog, createLog })(NewLog);

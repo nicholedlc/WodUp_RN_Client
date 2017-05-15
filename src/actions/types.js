@@ -17,3 +17,7 @@ export const NEW_EXERCISE_LOADING = 'NEW_EXERCISE_LOADING';
 
 export const INPUT_LOG = 'INPUT_LOG';
 export const PICK_IMAGE = 'PICK_IMAGE';
+export const NEW_LOG_LOADING = 'NEW_LOG_LOADING';
+export const NEW_LOG_SUCCEEDED = 'NEW_LOG_SUCCEEDED';
+export const NEW_LOG_FAILED = 'NEW_LOG_FAILED';
+export const RESET_NEW_LOG_FORM = 'RESET_NEW_LOG_FORM';
