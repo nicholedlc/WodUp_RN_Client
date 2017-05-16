@@ -3,14 +3,32 @@ import { connect } from 'react-redux';
 import { DatePickerIOS, View, Image } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
 import moment from 'moment';
-import { CardSection, BottomNav } from './common';
+import { CardSection, BottomNav, Spinner, ErrorMessage } from './common';
 import { inputLog, createLog } from '../actions';
 import PickImage from './PickImage';
 
 class NewLog extends Component {
   onButtonPress () {
-    const { createLog, id, date, rep, set, weight, note, uri } = this.props;
-    createLog({ id, date, rep, set, weight, note, uri });
+    const {
+      createLog, exerciseId, date, rep, set, weight, note, uri
+    } = this.props;
+    createLog({ exerciseId, date, rep, set, weight, note, uri });
+  }
+
+  renderButton () {
+    if (this.props.loading) {
+      return <Spinner />
+    }
+    return (
+      <Button block info
+        style={styles.buttonStyle}
+        onPress={() => this.onButtonPress()}
+      >
+        <Text>
+          Submit
+        </Text>
+      </Button>
+    );
   }
 
   renderImage () {
@@ -25,11 +43,13 @@ class NewLog extends Component {
   }
 
   render () {
-    const { name, inputLog, date, rep, set, weight, note } = this.props;
+    const {
+      exerciseName, inputLog, date, rep, set, weight, note
+    } = this.props;
     return (
       <Container>
         <CardSection>
-          <Text>{name}</Text>
+          <Text>{exerciseName}</Text>
         </CardSection>
 
         <Content style={{ flex: 1 }}>
@@ -94,14 +114,7 @@ class NewLog extends Component {
           {this.renderImage()}
           <Content padder />
 
-          <Button block info
-            style={styles.buttonStyle}
-            onPress={() => this.onButtonPress()}
-          >
-            <Text>
-              Submit
-            </Text>
-          </Button>
+          {this.renderButton()}
           <Content padder />
         </Content>
 
@@ -136,10 +149,14 @@ const styles = {
 
 const mapStateToProps = state => {
   const {
-    newLog: { date, rep, set, weight, note, uri },
-    exercise: { name, id }
+    exercise: { name, id },
+    newLog: { date, rep, set, weight, note, uri, loading, errorMessage }
   } = state;
-  return { name, id, date, rep, set, weight, note, uri };
+  return {
+    exerciseName: name,
+    exerciseId: id,
+    date, rep, set, weight, note, uri, loading, errorMessage
+  };
 };
 
 export default connect(mapStateToProps, { inputLog, createLog })(NewLog);

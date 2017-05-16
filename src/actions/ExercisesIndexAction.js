@@ -3,6 +3,7 @@ import {
   EXERCISES_LOADING,
   EXERCISES_FAILED
 } from './types';
+import { Exercise } from '../fetches';
 
 const exercisesSucceeded = exercises => {
   return {
@@ -18,15 +19,10 @@ const exercisesFailed = errorMessage => {
   };
 };
 
-export const fetchExercises = url => {
+export const getExercises = () => {
   return dispatch => {
     dispatch({ type: EXERCISES_LOADING });
-
-    fetch(url)
-      .then(response => {
-        if (!response.ok) throw Error(response.statusText);
-        return response.json();
-      })
+    return Exercise.getAll()
       .then(({exercises}) => dispatch(exercisesSucceeded(exercises)))
       .catch(errorMessage => {
         console.error(errorMessage);

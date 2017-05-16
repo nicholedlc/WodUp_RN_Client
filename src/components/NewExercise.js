@@ -23,14 +23,14 @@ class NewExercise extends Component {
               <Label>Exercise</Label>
               <Input value={text}
                 autoCorrect={false}
-                onChangeText={this.onTextInput.bind(this)} />
+                onChangeText={() => this.onTextInput()} />
             </Item>
           </Form>
           <Content  padder />
 
           <Button block info
             style={styles.buttonStyle}
-            onPress={this.onButtonPress.bind(this)}
+            onPress={() => this.onButtonPress()}
           >
             <Text>
               Submit
@@ -58,4 +58,7 @@ const mapStateToProps = state => {
   return { text: state.newExercise.text };
 };
 
-export default connect(mapStateToProps, { inputExercise, createExercise })(NewExercise);
+export default connect(mapStateToProps, {
+  inputExercise,
+  createExercise 
+})(NewExercise);

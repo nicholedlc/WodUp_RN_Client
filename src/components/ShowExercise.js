@@ -3,14 +3,14 @@ import { ListView, View, Text } from 'react-native';
 import { BottomNav, CardSection, Spinner, ErrorMessage } from './common';
 import { connect } from 'react-redux';
 import { Container } from 'native-base';
-import { fetchLogs } from '../actions';
+import { getLogs } from '../actions';
 import ShowLog from './ShowLog';
 
 const BASE_URL = 'http://localhost:3636';
 
 class ShowExercise extends Component {
   componentDidMount () {
-    this.props.fetchLogs(`${BASE_URL}/api/exercises/${this.props.exercise.id}`)
+    this.props.getLogs(this.props.exercise.id)
   }
 
   renderLog (log) {
@@ -51,7 +51,11 @@ const ds = new ListView.DataSource({
 });
 
 const mapStateToProps = state => {
-  const { exercise: { logs }, errorMessage, loading } = state.showExercise;
+  const {
+    exercise: { logs },
+    errorMessage,
+    loading
+  } = state.showExercise;
   return {
     exercise: state.exercise,
     logs: ds.cloneWithRows(logs || []),
@@ -60,4 +64,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchLogs })(ShowExercise);
+export default connect(mapStateToProps, { getLogs })(ShowExercise);

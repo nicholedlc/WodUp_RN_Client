@@ -6,8 +6,8 @@ import {
   NEW_LOG_FAILED,
   RESET_NEW_LOG_FORM
 } from './types';
-import RNFetchBlob from 'react-native-fetch-blob';
 import { Actions } from 'react-native-router-flux';
+import { Exercise } from '../fetches';
 
 const BASE_URL = 'http://localhost:3636';
 
@@ -39,37 +39,10 @@ export const pickImage = uri => {
   }
 }
 
-function sendLog ({ id, date, rep, set, weight, note, imageUrl }) {
-  return fetch(`${BASE_URL}/api/exercises/${id}/log`, {
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json',
-      // 'Authorization': `JWT ${localStorage.JWT}`
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      date, rep, set, weight, note, imageUrl
-    })
-  })
-  .then(response => response.json())
-}
-
-export const createLog = ({ id, date, rep, set, weight, note, uri }) => {
+export const createLog = ({ exerciseId, date, rep, set, weight, note, uri }) => {
   return dispatch => {
     dispatch({ type: NEW_LOG_LOADING });
-
-    RNFetchBlob
-      .fetch('POST' , `${BASE_URL}/api/uploads`, {
-        // 'Authorization': `JWT ${localStorage.JWT}`,
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'multipart/form-data',
-      }, [
-        { name: 'image', filename: 'something.jpg', data: `RNFetchBlob-${uri}` }
-      ])
-      .then(response => {
-        const { imageUrl } = JSON.parse(response.data);
-        return sendLog({ id, date, rep, set, weight, note, imageUrl });
-      })
+    return Exercise.postImage({ exerciseId, date, rep, set, weight, note, uri })
       .then(log => dispatch(newLogSucceeded(log)))
       .then(() => Actions.showExercise())
       .then(() => dispatch({ type: RESET_NEW_LOG_FORM }))

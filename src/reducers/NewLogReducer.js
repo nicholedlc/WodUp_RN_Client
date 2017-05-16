@@ -13,7 +13,9 @@ const INITIAL_STATE = {
   weight: null,
   note: null,
   imageUrl: null,
-  uri: null
+  uri: null,
+  loading: false,
+  errorMessage: ''
 }
 
 export default (state = INITIAL_STATE, action) => {

@@ -5,6 +5,7 @@ import {
   NEW_EXERCISE_FAILED
 } from './types';
 import { Actions } from 'react-native-router-flux';
+import { Exercise } from '../fetches';
 
 const newExerciseSucceeded = exercise => {
   return {
@@ -30,18 +31,7 @@ export const inputExercise = text => {
 export const createExercise = name => {
   return (dispatch) => {
     dispatch({ type: NEW_EXERCISE_LOADING });
-    fetch('http://localhost:3636/api/exercises', {
-      headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({ name })
-    })
-    .then(response => {
-      if(!response.ok) throw Error(response.statusText);
-      return response.json();
-    })
+    return Exercise.create(name)
     .then(({ exercise }) => {
       dispatch(newExerciseSucceeded(exercise));
       Actions.exercisesIndex();

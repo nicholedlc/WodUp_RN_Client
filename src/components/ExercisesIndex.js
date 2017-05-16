@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { ListView, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Container } from 'native-base';
-import { fetchExercises } from '../actions';
+import { getExercises } from '../actions';
 import ExerciseItem from './ExerciseItem';
 import { TopNav, CardSection, Spinner, ErrorMessage, BottomNav } from './common';
 
 class ExercisesIndex extends Component {
   componentDidMount () {
-    this.props.fetchExercises('http://localhost:3636/api/exercises');
+    this.props.getExercises();
   }
 
   renderExercise (exercise) {
@@ -51,10 +51,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchExercises: url => dispatch(fetchExercises(url))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExercisesIndex);
+export default connect(mapStateToProps, { getExercises })(ExercisesIndex);

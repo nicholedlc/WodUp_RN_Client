@@ -3,6 +3,7 @@ import {
   LOGS_LOADING,
   LOGS_FAILED
 } from './types';
+import { Exercise } from '../fetches';
 
 const logsSucceeded = logs => {
   return {
@@ -18,18 +19,10 @@ const logsFailed = errorMessage => {
   }
 }
 
-export const fetchLogs = url => {
+export const getLogs = exerciseId => {
   return dispatch => {
     dispatch({ type: LOGS_LOADING });
-
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response;
-      })
-      .then(response => response.json())
+    return Exercise.getLogs(exerciseId)
       .then(logs => dispatch(logsSucceeded(logs)))
       .catch(errorMessage => {
         console.error(errorMessage);
