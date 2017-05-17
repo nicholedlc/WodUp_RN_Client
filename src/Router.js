@@ -8,6 +8,7 @@ import NewLog from './components/NewLog';
 
 const RouterComponent = () => {
   // renderBackButton={() => <Icon name='arrow-back' />}
+  // TODO backgroundColor #222b2e
   return (
     <Router sceneStyle={{ paddingTop: 66 }}
       backTitle="Back"
@@ -24,13 +25,13 @@ const RouterComponent = () => {
       />
       <Scene key='showExercise'
         component={ShowExercise}
-        title='Daily Log'
+        title='WODUP!'
         rightTitle='Add'
         onRight={() => Actions.createNewLog()}
       />
       <Scene key='createNewLog'
         component={NewLog}
-        title='New Log'
+        title='WODUP!'
       />
     </Router>
   );

@@ -27,8 +27,8 @@ class ShowExercise extends Component {
     }
     return (
       <Container>
-        <CardSection>
-          <Text>{exercise.name}</Text>
+        <CardSection style={{ justifyContent: 'center' }}>
+          <Text style={{color: '#ff4040', fontSize: 18}}>{exercise.name}</Text>
         </CardSection>
 
         <Container style={{flex: 1}}>

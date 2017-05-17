@@ -102,6 +102,7 @@ class NewLog extends Component {
                 autoCorrect={false}
                 multiline={true}
                 numberOfLines={4}
+                maxLength={150}
                 onChangeText={val => inputLog({ key: 'note', val})}
               />
             </Item>
@@ -109,8 +110,8 @@ class NewLog extends Component {
 
             <PickImage />
           </Form>
-
           <Content padder />
+
           {this.renderImage()}
           <Content padder />
 
