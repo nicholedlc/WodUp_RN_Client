@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View, Image, Text } from 'react-native';
+import { TouchableWithoutFeedback, View, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import { CardSection, FormField } from './common';
@@ -28,11 +28,10 @@ class PickImage extends Component {
 
   render () {
     return (
-      <TouchableOpacity
-        style={styles.rowStyle}
+      <TouchableWithoutFeedback
         onPress={() => this.onButtonPress()}
       >
-        <View>
+        <View style={styles.rowStyle}>
           <CardSection>
             <View style={styles.containerStyle}>
               <Text style={styles.labelStyle}>
@@ -44,7 +43,7 @@ class PickImage extends Component {
             </View>
           </CardSection>
         </View>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     );
   }
 }

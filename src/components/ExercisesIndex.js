@@ -32,7 +32,7 @@ class ExercisesIndex extends Component {
             enableEmptySections
           />
         </Container>
-        <BottomNav />
+        {/* <BottomNav /> */}
       </Container>
     );
   }

@@ -38,7 +38,7 @@ class ShowExercise extends Component {
           </ListView>
         </Container>
 
-        <BottomNav />
+        {/* <BottomNav /> */}
       </Container>
     )
   };

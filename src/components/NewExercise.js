@@ -55,7 +55,7 @@ class NewExercise extends Component {
           {this.renderButton()}
         </Content>
 
-      <BottomNav />
+      {/* <BottomNav /> */}
       </Container>
     );
   }

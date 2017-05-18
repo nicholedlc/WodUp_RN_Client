@@ -170,7 +170,7 @@ class NewLog extends Component {
           <Content padder />
         </Content>
 
-        <BottomNav />
+        {/* <BottomNav /> */}
       </Container>
     </View>
     );
