@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ListView, View, Text } from 'react-native';
-import { BottomNav, CardSection, Spinner, ErrorMessage } from './common';
+import { BottomNav, CardSection, Spinner, ErrorMessage, SubHeader } from './common';
 import { connect } from 'react-redux';
 import { Container } from 'native-base';
 import { getLogs } from '../actions';
@@ -27,9 +27,7 @@ class ShowExercise extends Component {
     }
     return (
       <Container>
-        <CardSection style={{ justifyContent: 'center' }}>
-          <Text style={{color: '#ff4040', fontSize: 18}}>{exercise.name}</Text>
-        </CardSection>
+        <SubHeader>{exercise.name}</SubHeader>
 
         <Container style={{flex: 1}}>
           <ListView
@@ -51,6 +49,7 @@ const ds = new ListView.DataSource({
 });
 
 const mapStateToProps = state => {
+  console.log(state.exercise.id)
   const {
     exercise: { logs },
     errorMessage,

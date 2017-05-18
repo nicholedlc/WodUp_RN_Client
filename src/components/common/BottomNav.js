@@ -3,27 +3,27 @@ import { Container, Content, Footer, FooterTab, Button, Icon, Text } from 'nativ
 import { Actions } from 'react-native-router-flux';
 const BottomNav = () => {
   return (
-    <Container style={{flex: 0, height: 55.5}}>
+    <Container style={{flex: 0, height: 55.5 }}>
         <Content />
         <Footer >
           <FooterTab>
-            <Button vertical>
-              <Icon name="person" />
-              <Text>Profile</Text>
+            <Button vertical style={{ backgroundColor: '#002c31', borderRadius: 0 }}>
+              <Icon name="person" style={{ color: 'white' }} />
+              <Text style={{ color: 'white' }}>Profile</Text>
             </Button>
-            <Button vertical
+            <Button vertical style={{ backgroundColor: '#002c31', borderRadius: 0 }}
               onPress={() => Actions.exercisesIndex()}
             >
-              <Icon name="speedometer" />
-              <Text>Track</Text>
+              <Icon name="speedometer" style={{ color: 'white' }} />
+              <Text style={{ color: 'white' }}>Track</Text>
             </Button>
-            <Button vertical>
-                <Icon active name="settings" />
-                <Text>Settings</Text>
+            <Button vertical style={{ backgroundColor: '#002c31', borderRadius: 0 }}>
+                <Icon active name="settings" style={{ color: 'white' }} />
+                <Text style={{ color: 'white' }}>Settings</Text>
             </Button>
-            <Button vertical>
-              <Icon name="calculator" />
-              <Text>Tools</Text>
+            <Button vertical style={{ backgroundColor: '#002c31', borderRadius: 0 }}>
+              <Icon name="calculator" style={{ color: 'white' }} />
+              <Text style={{ color: 'white' }}>Tools</Text>
             </Button>
           </FooterTab>
         </Footer>

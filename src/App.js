@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { Container } from 'native-base';
 
@@ -13,6 +13,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <Container>
+        <StatusBar
+          barStyle='light-content'
+        />
         <Router />
       </Container>
     </Provider>

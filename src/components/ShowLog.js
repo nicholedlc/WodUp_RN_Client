@@ -5,7 +5,8 @@ import {
   Text,
   Image,
   LayoutAnimation,
-  ScrollView
+  ScrollView,
+  Dimensions as D
 } from 'react-native';
 import { Container, Icon, Thumbnail } from 'native-base';
 import { connect } from 'react-redux';
@@ -52,7 +53,7 @@ class ShowLog extends Component {
                   />
                 : <Image
                     style={[imageStyle, defaultImageStyle]}
-                    source={require('../../assets/images/kettlebell-2.png')}
+                    source={require('../../assets/images/dumbell.png')}
                   />
               }
             </View>
@@ -72,12 +73,14 @@ class ShowLog extends Component {
     } = this.props;
     const {
       sectionHeaderStyle,
+      thumbnailStyle,
       defaultThumbnailStyle,
       dateStyle,
       iconStyle,
     } = styles;
     const exerciseDate = moment(Date.parse(date)).format('ddd, MMMM Do YYYY');
 
+    //TODO: Fix arrow icon centering
     return (
       <View>
         <TouchableWithoutFeedback onPress={() => this.toggleView()}>
@@ -88,17 +91,19 @@ class ShowLog extends Component {
                   {imageUrl
                     ? <Thumbnail
                       source={{uri: `http://localhost:3636${imageUrl}`}}
-                      small squre
+                      style={thumbnailStyle}
+                      small
+                      square
                       />
                     : <Thumbnail
-                      source={require('../../assets/images/kettlebell-2.png')}
+                      source={require('../../assets/images/dumbell.png')}
                       style={defaultThumbnailStyle}
                       small square
                       />
                   }
-                  <Text style={dateStyle}>
-                    {exerciseDate}
-                  </Text>
+                    <Text style={dateStyle}>
+                      {exerciseDate}
+                    </Text>
                 </View>
                 <Icon
                   name={expanded
@@ -143,6 +148,9 @@ const styles = {
     color: '#696969',
     fontSize: 15
   },
+  thumbnailStyle: {
+    borderRadius: 5
+  },
   defaultThumbnailStyle: {
     opacity: 0.5
   },
@@ -154,10 +162,10 @@ const styles = {
   imageStyle: {
     height: 300,
     maxHeight: 365,
-    width:365,
+    width: D.get('window').width - 10,
     borderColor: '#ddd',
     borderWidth: 1,
-    borderTopWidth: 0
+    borderTopWidth: 0,
     // flex: 1,
     // width: null
   },

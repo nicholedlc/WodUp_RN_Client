@@ -1,14 +1,67 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DatePickerIOS, View, Image } from 'react-native';
-import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
+import { TouchableWithoutFeedback, DatePickerIOS, Modal, View, Image, Button } from 'react-native';
+import { Container, Content, Form, Item, Input, Label, Text, Thumbnail } from 'native-base';
 import moment from 'moment';
-import { CardSection, BottomNav, Spinner, ErrorMessage } from './common';
-import { inputLog, createLog } from '../actions';
+import { Card, CardSection, BottomNav, Spinner, ErrorMessage, SubHeader, FormField } from './common';
+import { openModal, inputLog, createLog, resetNewLogForm } from '../actions';
 import PickImage from './PickImage';
 
 class NewLog extends Component {
-  onButtonPress () {
+  componentDidMount () {
+    return this.props.resetNewLogForm();
+  }
+
+  // TODO: resetDate should return the previous input date rather than today's date
+
+  resetDate () {
+    const today = this.props.date;
+    this.props.inputLog({ key: 'date', val: today });
+    return this.props.openModal(false);
+  }
+
+  modal () {
+    const { modalActive, openModal, date, inputLog } = this.props;
+    const { modalViewStyle, modalButtonContainerStyle, datePickerStyle } = styles;
+    return (
+      <View>
+        <Modal
+          visible={modalActive || false}
+          transparent={true}
+          animationType={'slide'}
+          >
+          <View style={modalViewStyle}>
+            <TouchableWithoutFeedback onPress={() => this.props.openModal(false)}>
+              <View style={{ flex: 1 }} />
+            </TouchableWithoutFeedback>
+            <View>
+              <View style={modalButtonContainerStyle}>
+                <Button
+                  color='#67bec9'
+                  title='Cancel'
+                  onPress={() => this.resetDate()}
+                />
+                <Button
+                  color='#67bec9'
+                  title='Done'
+                  onPress={() => openModal(false)}
+                />
+              </View>
+              <View style={datePickerStyle}>
+                <DatePickerIOS
+                  date={date}
+                  mode='date'
+                  onDateChange={val => inputLog({ key: 'date', val })}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
+      </View>
+    );
+  }
+
+  onSubmit () {
     const {
       createLog, exerciseId, date, rep, set, weight, note, uri
     } = this.props;
@@ -20,100 +73,98 @@ class NewLog extends Component {
       return <Spinner />
     }
     return (
-      <Button block info
-        style={styles.buttonStyle}
-        onPress={() => this.onButtonPress()}
-      >
-        <Text>
-          Submit
-        </Text>
-      </Button>
+      <View style={styles.buttonStyle}>
+        <Button
+          color='white'
+          title='Submit'
+          onPress={() => this.onSubmit()}
+        />
+      </View>
     );
-  }
-
-  renderImage () {
-    const { uri } = this.props;
-    if (uri !== null) {
-      return (
-        <View style={styles.imageViewStyle}>
-          <Image source={{uri}} style={styles.imageStyle} />
-        </View>
-      );
-    }
   }
 
   render () {
     const {
-      exerciseName, inputLog, date, rep, set, weight, note
+      exerciseName, openModal, date, inputLog, rep, set, weight, note, uri
     } = this.props;
+    console.log('modalActive: ', this.props.modalActive)
+
     return (
-      <Container>
-        <CardSection>
-          <Text>{exerciseName}</Text>
-        </CardSection>
+      <View style={{ flex: 1 }}>
+        <SubHeader>{exerciseName}</SubHeader>
 
-        <Content style={{ flex: 1 }}>
-          <Form style={styles.formStyle}>
-            <Item>
-              <Label>Date</Label>
-              <Input
-                value={`${moment(Date.parse(date)).format('ddd, MMMM Do YYYY')}`}
-                editable={false}
-              />
-            </Item>
-            <DatePickerIOS
-              date={date}
-              mode='date'
-              onDateChange={val => inputLog({ key: 'date', val })}
+        <Card style={styles.cardStyle}>
+          <TouchableWithoutFeedback
+            onPress={() => openModal(true)}
+          >
+            <View>
+              <CardSection>
+                <FormField
+                  label='Date'
+                  value={`${moment(Date.parse(date)).format('ddd, MMMM Do YYYY')}`}
+                  editable={false}
+                />
+              </CardSection>
+              {this.modal()}
+            </View>
+          </TouchableWithoutFeedback>
+
+          <CardSection style={styles.cardSectionStyle}>
+            <FormField
+              label='Reps'
+              value={rep}
+              keyboardType='numeric'
+              onChangeText={val => inputLog({ key: 'rep', val})}
             />
+          </CardSection>
 
-            <Item>
-              <Label>Reps</Label>
-              <Input
-                value={rep}
-                keyboardType='numeric'
-                onChangeText={val => inputLog({ key: 'rep', val})}
-              />
-            </Item>
+          <CardSection style={styles.cardSectionStyle}>
+            <FormField
+              label='Sets'
+              value={set}
+              keyboardType='numeric'
+              onChangeText={val => inputLog({ key: 'set', val})}
+            />
+          </CardSection>
 
-            <Item>
-              <Label>Sets</Label>
-              <Input
-                value={set}
-                keyboardType='numeric'
-                onChangeText={val => inputLog({ key: 'set', val})}
-              />
-            </Item>
+          <CardSection>
+            <FormField
+              label='Weights'
+              value={weight}
+              keyboardType='numeric'
+              onChangeText={val => inputLog({ key: 'weight', val})}
+            />
+          </CardSection>
 
-            <Item>
-              <Label>Weights</Label>
-              <Input
-                value={weight}
-                keyboardType='numeric'
-                onChangeText={val => inputLog({ key: 'weight', val})}
-              />
-            </Item>
+          <CardSection style={{ height: 125 }}>
+            <FormField
+              label='Notes'
+              style={styles.noteStyle}
+              value={note}
+              autoCorrect={false}
+              multiline={true}
+              numberOfLines={4}
+              maxLength={100}
+              onChangeText={val => inputLog({ key: 'note', val})}
+            />
+          </CardSection>
+            <PickImage>
+              {uri
+                ? <Thumbnail
+                  source={{uri}}
+                  style={styles.thumbnailStyle}
+                  small
+                  square
+                  />
+                : <Text>{' '}</Text>
+              }
+            </PickImage>
+        </Card>
 
-            <Item>
-              <Label>Notes</Label>
-              <Input
-                style={styles.noteStyle}
-                value={note}
-                autoCorrect={false}
-                multiline={true}
-                numberOfLines={4}
-                maxLength={150}
-                onChangeText={val => inputLog({ key: 'note', val})}
-              />
-            </Item>
+
+        <Container>
+          <Content>
             <Content padder />
-
-            <PickImage />
-          </Form>
-          <Content padder />
-
-          {this.renderImage()}
-          <Content padder />
 
           {this.renderButton()}
           <Content padder />
@@ -121,6 +172,7 @@ class NewLog extends Component {
 
         <BottomNav />
       </Container>
+    </View>
     );
   }
 }
@@ -128,36 +180,58 @@ class NewLog extends Component {
 const styles = {
   buttonStyle: {
     flex: 0,
-    marginLeft: 15,
-    marginRight: 15
+    marginLeft: 5,
+    marginRight: 5,
+    backgroundColor: '#67bec9',
+    borderRadius: 5
   },
   formStyle: {
     marginRight: 15,
   },
+  modalViewStyle: {
+    justifyContent: 'flex-end',
+    flex: 1
+  },
+  modalButtonContainerStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'whitesmoke'
+  },
+  modalButtonStyle: {
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  datePickerStyle: {
+    backgroundColor: 'gainsboro'
+  },
   noteStyle: {
-    height: 115,
-    paddingTop: 15,
-    paddingBottom: 15
+    height: 100,
+    paddingTop: 5,
+    paddingBottom: 5
   },
-  imageViewStyle: {
-    marginLeft: 15,
+  thumbnailStyle: {
+    borderRadius: 5
   },
-  imageStyle: {
-    height: 345,
-    width: 345
+  cardStyle: {
+    borderWidth: 0
+  },
+  cardSectionStyle: {
+    paddingTop: 5,
+    paddingBottom: 5
   }
 }
 
 const mapStateToProps = state => {
   const {
     exercise: { name, id },
-    newLog: { date, rep, set, weight, note, uri, loading, errorMessage }
+    newLog: { modalActive, date, rep, set, weight, note, uri, loading, errorMessage }
   } = state;
   return {
     exerciseName: name,
     exerciseId: id,
-    date, rep, set, weight, note, uri, loading, errorMessage
+    modalActive, date, rep, set, weight, note, uri, loading, errorMessage
   };
 };
 
-export default connect(mapStateToProps, { inputLog, createLog })(NewLog);
+export default connect(mapStateToProps, { openModal, inputLog, createLog, resetNewLogForm })(NewLog);

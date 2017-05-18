@@ -1,4 +1,6 @@
-import { INPUT_LOG,
+import {
+  OPEN_MODAL,
+  INPUT_LOG,
   PICK_IMAGE,
   NEW_LOG_SUCCEEDED,
   NEW_LOG_LOADING,
@@ -7,6 +9,7 @@ import { INPUT_LOG,
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  modalActive: false,
   date: new Date(),
   rep: null,
   set: null,
@@ -20,6 +23,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case OPEN_MODAL:
+      return { ...state, modalActive: action.bool }
     case INPUT_LOG:
       return { ...state, [action.payload.key]: action.payload.val };
     case PICK_IMAGE:

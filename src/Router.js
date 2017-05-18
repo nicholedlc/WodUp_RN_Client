@@ -10,28 +10,32 @@ const RouterComponent = () => {
   // renderBackButton={() => <Icon name='arrow-back' />}
   // TODO backgroundColor #222b2e
   return (
-    <Router sceneStyle={{ paddingTop: 66 }}
-      backTitle="Back"
+    <Router sceneStyle={{ paddingTop: 66, backgroundColor: '#EAEAEA' }}
+      title='WODUP!'
+      backTitle='Back'
+      navigationBarStyle={{backgroundColor: '#002C31', height: 66 }}
+      titleStyle={{color: 'white', fontWeight: 'bold', fontSize: 20 }}
+      backButtonTextStyle={{ color: '#67bec9' }}
+      rightButtonTextStyle={{ color: '#67bec9' }}
     >
       <Scene key='exercisesIndex'
         component={ExercisesIndex}
-        title='WODUP!'
         rightTitle='Add'
         onRight={() => Actions.createNewExercise()}
       />
       <Scene key='createNewExercise'
         component={NewExercise}
-        title='WODUP!'
+        leftTitle='Back'
+        leftButtonTextStyle={{ color: '#67bec9' }}
+        onLeft={() => Actions.exercisesIndex()}
       />
       <Scene key='showExercise'
         component={ShowExercise}
-        title='WODUP!'
         rightTitle='Add'
         onRight={() => Actions.createNewLog()}
       />
       <Scene key='createNewLog'
         component={NewLog}
-        title='WODUP!'
       />
     </Router>
   );

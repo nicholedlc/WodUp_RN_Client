@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
+import { View, Button } from 'react-native';
+import { Container, Content, Form, Item, Input, Label, Text } from 'native-base';
 import { BottomNav } from './common';
 import { inputExercise, createExercise } from '../actions';
 
@@ -9,8 +10,23 @@ class NewExercise extends Component {
     this.props.inputExercise(value)
   }
 
-  onButtonPress () {
+  onSubmit () {
     this.props.createExercise(this.props.text);
+  }
+
+  renderButton () {
+    if (this.props.loading) {
+      return <Spinner />
+    }
+    return (
+      <View style={styles.buttonStyle}>
+        <Button
+          color='white'
+          title='Submit'
+          onPress={() => this.onSubmit()}
+        />
+      </View>
+    );
   }
 
   render () {
@@ -28,14 +44,15 @@ class NewExercise extends Component {
           </Form>
           <Content  padder />
 
-          <Button block info
+          {/* <Button block info
             style={styles.buttonStyle}
             onPress={() => this.onButtonPress()}
           >
             <Text>
               Submit
             </Text>
-          </Button>
+          </Button> */}
+          {this.renderButton()}
         </Content>
 
       <BottomNav />
@@ -46,8 +63,11 @@ class NewExercise extends Component {
 
 const styles = {
   buttonStyle: {
-    marginLeft: 15,
-    marginRight: 15
+    flex: 0,
+    marginLeft: 5,
+    marginRight: 5,
+    backgroundColor: '#67bec9',
+    borderRadius: 5
   },
   formStyle: {
     marginRight: 15
@@ -60,5 +80,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   inputExercise,
-  createExercise 
+  createExercise
 })(NewExercise);
