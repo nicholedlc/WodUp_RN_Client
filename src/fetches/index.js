@@ -1,6 +1,8 @@
 import RNFetchBlob from 'react-native-fetch-blob';
 
-const BASE_URL = 'http://localhost:3636/api';
+// const BASE_URL = 'http://localhost:3636/api';
+const BASE_URL = 'http://daf99839.ngrok.io/api';
+
 
 const Exercise = {
   getAll () {
@@ -42,7 +44,7 @@ const Exercise = {
 
   postImage ({ exerciseId, date, rep, set, weight, note, uri }) {
     if (!uri) {
-      return this.sendLog({ exerciseId, date, rep, set, weight, note });
+      return this.sendLog({ exerciseId, date, rep, set, weight, note, imageUrl: null });
     }
     return (
       RNFetchBlob
@@ -55,7 +57,7 @@ const Exercise = {
         ])
         .then(response => {
           const { imageUrl } = JSON.parse(response.data);
-          return this.sendLog({ exerciseId, date, rep, set, weight, note, imageUrl: null });
+          return this.sendLog({ exerciseId, date, rep, set, weight, note, imageUrl });
         })
     );
   },

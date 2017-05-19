@@ -157,7 +157,7 @@ const styles = {
     opacity: 0.5
   },
   scrollViewStyle: {
-    backgroundColor: '#f6f5f4',
+    backgroundColor: '#f7f7f6',
     marginLeft: 5,
     marginRight: 5,
   },
@@ -168,8 +168,6 @@ const styles = {
     borderColor: '#ddd',
     borderWidth: 1,
     borderTopWidth: 0,
-    // flex: 1,
-    // width: null
   },
   defaultImageStyle: {
     opacity: 0.1
