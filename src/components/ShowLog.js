@@ -80,6 +80,8 @@ class ShowLog extends Component {
     } = styles;
     const exerciseDate = moment(Date.parse(date)).format('ddd, MMMM Do YYYY');
 
+    console.log('log', date, weight, imageUrl);
+
     //TODO: Fix arrow icon centering
     return (
       <View>

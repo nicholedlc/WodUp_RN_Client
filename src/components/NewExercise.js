@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Button } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Text } from 'native-base';
-import { BottomNav } from './common';
+import { Card, CardSection, BottomNav } from './common';
 import { inputExercise, createExercise } from '../actions';
 
 class NewExercise extends Component {
@@ -33,28 +33,25 @@ class NewExercise extends Component {
     const { text } = this.props;
     return (
       <Container>
+        <Card>
+          <CardSection>
+            <Content>
+              <Form style={styles.formStyle}>
+                <Item floatingLabel>
+                  <Label>Exercise</Label>
+                  <Input value={text}
+                    autoCorrect={false}
+                    onChangeText={() => this.onTextInput()} />
+                  </Item>
+                </Form>
+            <Content  padder />
+            </Content>
+          </CardSection>
+        </Card>
         <Content>
-          <Form style={styles.formStyle}>
-            <Item floatingLabel>
-              <Label>Exercise</Label>
-              <Input value={text}
-                autoCorrect={false}
-                onChangeText={() => this.onTextInput()} />
-            </Item>
-          </Form>
-          <Content  padder />
-
-          {/* <Button block info
-            style={styles.buttonStyle}
-            onPress={() => this.onButtonPress()}
-          >
-            <Text>
-              Submit
-            </Text>
-          </Button> */}
+          <Content padder />
           {this.renderButton()}
         </Content>
-
       {/* <BottomNav /> */}
       </Container>
     );

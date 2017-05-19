@@ -41,6 +41,9 @@ const Exercise = {
   },
 
   postImage ({ exerciseId, date, rep, set, weight, note, uri }) {
+    if (!uri) {
+      return this.sendLog({ exerciseId, date, rep, set, weight, note });
+    }
     return (
       RNFetchBlob
         .fetch('POST' , `${BASE_URL}/uploads`, {
@@ -52,7 +55,7 @@ const Exercise = {
         ])
         .then(response => {
           const { imageUrl } = JSON.parse(response.data);
-          return this.sendLog({ exerciseId, date, rep, set, weight, note, imageUrl });
+          return this.sendLog({ exerciseId, date, rep, set, weight, note, imageUrl: null });
         })
     );
   },

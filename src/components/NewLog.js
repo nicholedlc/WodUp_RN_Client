@@ -213,9 +213,6 @@ const styles = {
   thumbnailStyle: {
     borderRadius: 5
   },
-  cardStyle: {
-    borderWidth: 0
-  },
   cardSectionStyle: {
     paddingTop: 5,
     paddingBottom: 5

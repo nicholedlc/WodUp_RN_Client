@@ -58,8 +58,8 @@ export const createLog = ({ exerciseId, date, rep, set, weight, note, uri }) => 
     dispatch({ type: NEW_LOG_LOADING });
     return Exercise.postImage({ exerciseId, date, rep, set, weight, note, uri })
       .then(log => dispatch(newLogSucceeded(log)))
-      .then(() => Actions.showExercise())
       .then(() => dispatch(resetNewLogForm()))
+      .then(() => Actions.showExercise())
       .catch(errorMessage => {
         console.error(errorMessage);
         return dispatch(newLogFailed(errorMessage))
