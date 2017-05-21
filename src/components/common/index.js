@@ -8,3 +8,7 @@ export * from './Card';
 export * from './Box';
 export * from './Stat';
 export * from './StatHeader';
+export * from './ModalComponent';
+export * from './ModalBar';
+export * from './ModalBarButton';
+export * from './ModalContent';

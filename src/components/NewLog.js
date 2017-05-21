@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TouchableWithoutFeedback, DatePickerIOS, Modal, View, Image, Button } from 'react-native';
+import { TouchableWithoutFeedback, DatePickerIOS, View, Image, Button } from 'react-native';
 import { Container, Content, Form, Item, Input, Label, Text, Thumbnail } from 'native-base';
 import moment from 'moment';
-import { Card, CardSection, BottomNav, Spinner, ErrorMessage, SubHeader, FormField } from './common';
+import { Card, CardSection, BottomNav, Spinner, ErrorMessage, SubHeader, FormField, ModalComponent, ModalBarButton } from './common';
 import { openModal, inputLog, createLog, resetNewLogForm } from '../actions';
 import PickImage from './PickImage';
 
@@ -25,12 +25,21 @@ class NewLog extends Component {
     const { modalViewStyle, modalButtonContainerStyle, datePickerStyle } = styles;
     return (
       <View>
-        <Modal
-          visible={modalActive || false}
+        <ModalComponent
+          visible={modalActive}
           transparent={true}
           animationType={'slide'}
+          onPress={() => openModal(false)}
           >
-          <View style={modalViewStyle}>
+          <ModalBarButton
+            title='Cancel'
+            onPress={() => this.resetDate()}
+          />
+          <ModalBarButton
+            title='Done'
+            onPress={() => openModal(false)}
+          />
+          {/* <View style={modalViewStyle}>
             <TouchableWithoutFeedback onPress={() => this.props.openModal(false)}>
               <View style={{ flex: 1 }} />
             </TouchableWithoutFeedback>
@@ -55,8 +64,8 @@ class NewLog extends Component {
                 />
               </View>
             </View>
-          </View>
-        </Modal>
+          </View> */}
+        </ModalComponent>
       </View>
     );
   }
@@ -85,7 +94,7 @@ class NewLog extends Component {
 
   render () {
     const {
-      exerciseName, openModal, date, inputLog, rep, set, weight, note, uri
+      exerciseName, openModal, date, inputLog, rep, set, weight, note, uri, modalActive
     } = this.props;
     console.log('modalActive: ', this.props.modalActive)
 
@@ -105,7 +114,9 @@ class NewLog extends Component {
                   editable={false}
                 />
               </CardSection>
+
               {this.modal()}
+
             </View>
           </TouchableWithoutFeedback>
 
@@ -192,11 +203,11 @@ const styles = {
     justifyContent: 'flex-end',
     flex: 1
   },
-  modalButtonContainerStyle: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: 'whitesmoke'
-  },
+  // modalButtonContainerStyle: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   backgroundColor: 'whitesmoke'
+  // },
   modalButtonStyle: {
     borderWidth: 1,
     justifyContent: 'center',
