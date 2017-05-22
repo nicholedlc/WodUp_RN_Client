@@ -12,3 +12,6 @@ export * from './ModalComponent';
 export * from './ModalBar';
 export * from './ModalBarButton';
 export * from './ModalContent';
+export * from './ButtonPrimary';
+export * from './ThumbnailPrimary';
+export * from './ThumbnailSecondary';

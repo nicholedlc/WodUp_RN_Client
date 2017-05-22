@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TouchableWithoutFeedback, DatePickerIOS, View, Image, Button } from 'react-native';
-import { Container, Content, Form, Item, Input, Label, Text, Thumbnail } from 'native-base';
+import {
+  TouchableWithoutFeedback,
+  DatePickerIOS,
+  View,
+  Text,
+  Image
+} from 'react-native';
+import { Container, Content } from 'native-base';
 import moment from 'moment';
-import { Card, CardSection, BottomNav, Spinner, ErrorMessage, SubHeader, FormField, ModalComponent, ModalBarButton } from './common';
+import {
+  Card,
+  CardSection,
+  BottomNav,
+  Spinner,
+  ErrorMessage,
+  SubHeader,
+  FormField,
+  ModalComponent,
+  ModalBar,
+  ModalBarButton,
+  ModalContent,
+  ButtonPrimary,
+  ThumbnailPrimary
+} from './common';
 import { openModal, inputLog, createLog, resetNewLogForm } from '../actions';
 import PickImage from './PickImage';
 
@@ -22,7 +42,9 @@ class NewLog extends Component {
 
   modal () {
     const { modalActive, openModal, date, inputLog } = this.props;
-    const { modalViewStyle, modalButtonContainerStyle, datePickerStyle } = styles;
+    const {
+      modalViewStyle, modalButtonContainerStyle, datePickerStyle
+    } = styles;
     return (
       <View>
         <ModalComponent
@@ -31,40 +53,23 @@ class NewLog extends Component {
           animationType={'slide'}
           onPress={() => openModal(false)}
           >
-          <ModalBarButton
-            title='Cancel'
-            onPress={() => this.resetDate()}
-          />
-          <ModalBarButton
-            title='Done'
-            onPress={() => openModal(false)}
-          />
-          {/* <View style={modalViewStyle}>
-            <TouchableWithoutFeedback onPress={() => this.props.openModal(false)}>
-              <View style={{ flex: 1 }} />
-            </TouchableWithoutFeedback>
-            <View>
-              <View style={modalButtonContainerStyle}>
-                <Button
-                  color='#67bec9'
-                  title='Cancel'
-                  onPress={() => this.resetDate()}
-                />
-                <Button
-                  color='#67bec9'
-                  title='Done'
-                  onPress={() => openModal(false)}
-                />
-              </View>
-              <View style={datePickerStyle}>
-                <DatePickerIOS
-                  date={date}
-                  mode='date'
-                  onDateChange={val => inputLog({ key: 'date', val })}
-                />
-              </View>
-            </View>
-          </View> */}
+          <ModalBar>
+            <ModalBarButton
+              title='Cancel'
+              onPress={() => this.resetDate()}
+            />
+            <ModalBarButton
+              title='Done'
+              onPress={() => openModal(false)}
+            />
+          </ModalBar>
+          <ModalContent>
+            <DatePickerIOS
+              date={date}
+              mode='date'
+              onDateChange={val => inputLog({ key: 'date', val })}
+            />
+          </ModalContent>
         </ModalComponent>
       </View>
     );
@@ -74,6 +79,7 @@ class NewLog extends Component {
     const {
       createLog, exerciseId, date, rep, set, weight, note, uri
     } = this.props;
+
     createLog({ exerciseId, date, rep, set, weight, note, uri });
   }
 
@@ -82,30 +88,33 @@ class NewLog extends Component {
       return <Spinner />
     }
     return (
-      <View style={styles.buttonStyle}>
-        <Button
-          color='white'
-          title='Submit'
-          onPress={() => this.onSubmit()}
-        />
-      </View>
+      <ButtonPrimary
+        title='Submit'
+        onPress={() => this.onSubmit()}
+      />
     );
   }
 
   render () {
     const {
-      exerciseName, openModal, date, inputLog, rep, set, weight, note, uri, modalActive
+      exerciseName,
+      openModal,
+      date,
+      inputLog,
+      rep,
+      set,
+      weight,
+      note,
+      uri,
+      modalActive
     } = this.props;
-    console.log('modalActive: ', this.props.modalActive)
 
     return (
       <View style={{ flex: 1 }}>
         <SubHeader>{exerciseName}</SubHeader>
 
-        <Card style={styles.cardStyle}>
-          <TouchableWithoutFeedback
-            onPress={() => openModal(true)}
-          >
+        <Card>
+          <TouchableWithoutFeedback onPress={() => openModal(true)}>
             <View>
               <CardSection>
                 <FormField
@@ -114,13 +123,11 @@ class NewLog extends Component {
                   editable={false}
                 />
               </CardSection>
-
               {this.modal()}
-
             </View>
           </TouchableWithoutFeedback>
 
-          <CardSection style={styles.cardSectionStyle}>
+          <CardSection >
             <FormField
               label='Reps'
               value={rep}
@@ -129,7 +136,7 @@ class NewLog extends Component {
             />
           </CardSection>
 
-          <CardSection style={styles.cardSectionStyle}>
+          <CardSection >
             <FormField
               label='Sets'
               value={set}
@@ -159,72 +166,29 @@ class NewLog extends Component {
               onChangeText={val => inputLog({ key: 'note', val})}
             />
           </CardSection>
-            <PickImage>
-              {uri
-                ? <Thumbnail
-                  source={{uri}}
-                  style={styles.thumbnailStyle}
-                  small
-                  square
-                  />
-                : <Text>{' '}</Text>
-              }
-            </PickImage>
+
+          <PickImage>
+            {uri ? <ThumbnailPrimary source={{uri}} /> : <Text>{' '}</Text> }
+          </PickImage>
         </Card>
 
 
         <Container>
           <Content>
             <Content padder />
-
-          {this.renderButton()}
-          <Content padder />
-        </Content>
-
-        {/* <BottomNav /> */}
-      </Container>
-    </View>
+            {this.renderButton()}
+            <Content padder />
+          </Content>
+          {/* <BottomNav /> */}
+        </Container>
+      </View>
     );
   }
 }
 
 const styles = {
-  buttonStyle: {
-    flex: 0,
-    marginLeft: 5,
-    marginRight: 5,
-    backgroundColor: '#67bec9',
-    borderRadius: 5
-  },
-  formStyle: {
-    marginRight: 15,
-  },
-  modalViewStyle: {
-    justifyContent: 'flex-end',
-    flex: 1
-  },
-  // modalButtonContainerStyle: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   backgroundColor: 'whitesmoke'
-  // },
-  modalButtonStyle: {
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  datePickerStyle: {
-    backgroundColor: 'gainsboro'
-  },
   noteStyle: {
     height: 100,
-    paddingTop: 5,
-    paddingBottom: 5
-  },
-  thumbnailStyle: {
-    borderRadius: 5
-  },
-  cardSectionStyle: {
     paddingTop: 5,
     paddingBottom: 5
   }
@@ -233,13 +197,35 @@ const styles = {
 const mapStateToProps = state => {
   const {
     exercise: { name, id },
-    newLog: { modalActive, date, rep, set, weight, note, uri, loading, errorMessage }
+    newLog: {
+      modalActive,
+      date,
+      rep,
+      set,
+      weight,
+      note,
+      uri,
+      loading,
+      errorMessage }
   } = state;
   return {
     exerciseName: name,
     exerciseId: id,
-    modalActive, date, rep, set, weight, note, uri, loading, errorMessage
+    modalActive,
+    date,
+    rep,
+    set,
+    weight,
+    note,
+    uri,
+    loading,
+    errorMessage
   };
 };
 
-export default connect(mapStateToProps, { openModal, inputLog, createLog, resetNewLogForm })(NewLog);
+export default connect(mapStateToProps, {
+  openModal,
+  inputLog,
+  createLog,
+  resetNewLogForm
+})(NewLog);

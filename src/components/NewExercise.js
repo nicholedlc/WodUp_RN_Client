@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Button } from 'react-native';
-import { Container, Content, Form, Item, Input, Label, Text } from 'native-base';
-import { Card, CardSection, BottomNav } from './common';
+import { Content
+} from 'native-base';
+import { Card, CardSection, FormField, SubHeader, BottomNav, ButtonPrimary } from './common';
 import { inputExercise, createExercise } from '../actions';
 
 class NewExercise extends Component {
@@ -19,55 +20,36 @@ class NewExercise extends Component {
       return <Spinner />
     }
     return (
-      <View style={styles.buttonStyle}>
-        <Button
-          color='white'
-          title='Submit'
-          onPress={() => this.onSubmit()}
-        />
-      </View>
+      <ButtonPrimary
+        title='Submit'
+        onPress={() => this.onSubmit()}
+      />
     );
   }
 
   render () {
     const { text } = this.props;
     return (
-      <Container>
+      <View style={{ flex: 1 }}>
+        <SubHeader>Add New Exercise</SubHeader>
         <Card>
           <CardSection>
-            <Content>
-              <Form style={styles.formStyle}>
-                <Item floatingLabel>
-                  <Label>Exercise</Label>
-                  <Input value={text}
-                    autoCorrect={false}
-                    onChangeText={() => this.onTextInput()} />
-                  </Item>
-                </Form>
-            <Content  padder />
-            </Content>
+            <FormField
+              label='Name'
+              value={text}
+              autoCorrect={false}
+              onChangeText={() => this.onTextInput()}
+            />
           </CardSection>
         </Card>
+
         <Content>
           <Content padder />
           {this.renderButton()}
+          <Content padder />
         </Content>
-      {/* <BottomNav /> */}
-      </Container>
+      </View>
     );
-  }
-}
-
-const styles = {
-  buttonStyle: {
-    flex: 0,
-    marginLeft: 5,
-    marginRight: 5,
-    backgroundColor: '#67bec9',
-    borderRadius: 5
-  },
-  formStyle: {
-    marginRight: 15
   }
 }
 

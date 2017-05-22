@@ -1,42 +1,67 @@
 import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import { Icon } from 'native-base';
+import { NAV_HEIGHT, COLOR_PRIMARY, COLOR_SECONDARY } from './styles/common';
+import * as S from './styles/common'
 import ExercisesIndex from './components/ExercisesIndex';
 import NewExercise from './components/NewExercise';
 import ShowExercise from './components/ShowExercise';
 import NewLog from './components/NewLog';
 
-  // TODO refactor styles
-
 const RouterComponent = () => {
+  const { sceneStyle, navigationBarStyle, titleStyle, buttonTextStyle } = styles;
   return (
-    <Router sceneStyle={{ paddingTop: 66, backgroundColor: '#EAEAEA' }}
+    <Router
+      sceneStyle={sceneStyle}
       title='WODUP!'
       backTitle='Back'
-      navigationBarStyle={{backgroundColor: '#002C31', height: 66 }}
-      titleStyle={{color: 'white', fontWeight: 'bold', fontSize: 20 }}
-      backButtonTextStyle={{ color: '#67bEC9' }}
-      rightButtonTextStyle={{ color: '#67bEC9' }}
+      navigationBarStyle={navigationBarStyle}
+      titleStyle={titleStyle}
+      backButtonTextStyle={buttonTextStyle}
+      rightButtonTextStyle={buttonTextStyle}
     >
-      <Scene key='exercisesIndex'
+      <Scene
+        key='exercisesIndex'
         component={ExercisesIndex}
         rightTitle='Add'
         onRight={() => Actions.createNewExercise()}
       />
-      <Scene key='createNewExercise'
+      <Scene
+        key='createNewExercise'
         component={NewExercise}
         onLeft={() => Actions.exercisesIndex()}
       />
-      <Scene key='showExercise'
+      <Scene
+        key='showExercise'
         component={ShowExercise}
         rightTitle='Add'
         onRight={() => Actions.createNewLog()}
       />
-      <Scene key='createNewLog'
+      <Scene
+        key='createNewLog'
         component={NewLog}
       />
     </Router>
   );
 }
+
+const styles = {
+  sceneStyle: {
+    paddingTop: 66,
+    backgroundColor: `${COLOR_PRIMARY}`
+  },
+  navigationBarStyle: {
+    backgroundColor: `${COLOR_SECONDARY}`,
+    height: 66
+  },
+  titleStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  buttonTextStyle: {
+    color: `${COLOR_PRIMARY}`
+  }
+};
 
 export default RouterComponent;

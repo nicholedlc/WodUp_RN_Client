@@ -1,10 +1,8 @@
 import React from 'react';
 import { Modal, View, TouchableWithoutFeedback } from 'react-native';
-import { ModalBar } from './ModalBar';
+import { ModalBar, ModalContent } from './ModalBar';
 
 const ModalComponent = props => {
-  // const { modalActive, openModal, date, inputLog } = this.props;
-  // const { modalViewStyle, modalButtonContainerStyle, datePickerStyle } = styles;
   return (
     <Modal
       visible={props.visible || false}
@@ -17,14 +15,8 @@ const ModalComponent = props => {
         </TouchableWithoutFeedback>
 
         <View>
-          <ModalBar>
-            {props.children}
-          </ModalBar>
-          {/* <ModalContent>
-            {props.children}
-          </ModalContent> */}
+          {props.children}
         </View>
-
       </View>
     </Modal>
   );

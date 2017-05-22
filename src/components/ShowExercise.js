@@ -49,7 +49,6 @@ const ds = new ListView.DataSource({
 });
 
 const mapStateToProps = state => {
-  console.log(state.exercise.id)
   const {
     exercise: { logs },
     errorMessage,

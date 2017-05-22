@@ -6,12 +6,20 @@ import {
   Image,
   LayoutAnimation,
   ScrollView,
-  Dimensions as D
+  Dimensions
 } from 'react-native';
-import { Container, Icon, Thumbnail } from 'native-base';
+import { Icon } from 'native-base';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { Card, CardSection, Box, StatHeader, Stat } from './common';
+import {
+  Card,
+  CardSection,
+  Box,
+  StatHeader,
+  Stat,
+  ThumbnailPrimary,
+  ThumbnailSecondary
+} from './common';
 import { showLogInfo } from '../actions';
 
 
@@ -73,14 +81,10 @@ class ShowLog extends Component {
     } = this.props;
     const {
       sectionHeaderStyle,
-      thumbnailStyle,
-      defaultThumbnailStyle,
       dateStyle,
       iconStyle,
     } = styles;
     const exerciseDate = moment(Date.parse(date)).format('ddd, MMMM Do YYYY');
-
-    console.log('log', date, weight, imageUrl);
 
     //TODO: Fix arrow icon centering
     return (
@@ -88,19 +92,16 @@ class ShowLog extends Component {
         <TouchableWithoutFeedback onPress={() => this.toggleView()}>
           <View>
             <Card>
+
               <CardSection>
                 <View style={sectionHeaderStyle}>
-                  {imageUrl
-                    ? <Thumbnail
+                  {
+                    imageUrl
+                    ? <ThumbnailPrimary
                       source={{uri: `http://localhost:3636${imageUrl}`}}
-                      style={thumbnailStyle}
-                      small
-                      square
                       />
-                    : <Thumbnail
+                    : <ThumbnailSecondary
                       source={require('../../assets/images/dumbell.png')}
-                      style={defaultThumbnailStyle}
-                      small square
                       />
                   }
                     <Text style={dateStyle}>
@@ -108,12 +109,11 @@ class ShowLog extends Component {
                     </Text>
                 </View>
                 <Icon
-                  name={expanded
-                    ? 'arrow-down'
-                    : 'arrow-forward'}
+                  name={expanded ? 'arrow-down' : 'arrow-forward'}
                   style={iconStyle}
                 />
               </CardSection>
+
               <CardSection>
                 <Box>
                   <StatHeader>Reps</StatHeader>
@@ -128,6 +128,7 @@ class ShowLog extends Component {
                   <Stat>{weight}</Stat>
                 </Box>
               </CardSection>
+
             </Card>
           </View>
         </TouchableWithoutFeedback>
@@ -150,12 +151,6 @@ const styles = {
     color: '#696969',
     fontSize: 15
   },
-  thumbnailStyle: {
-    borderRadius: 5
-  },
-  defaultThumbnailStyle: {
-    opacity: 0.5
-  },
   scrollViewStyle: {
     backgroundColor: '#f7f7f6',
     marginLeft: 5,
@@ -164,16 +159,13 @@ const styles = {
   imageStyle: {
     height: 300,
     maxHeight: 365,
-    width: D.get('window').width - 10,
+    width: Dimensions.get('window').width - 10,
     borderColor: '#ddd',
     borderWidth: 1,
     borderTopWidth: 0,
   },
   defaultImageStyle: {
     opacity: 0.1
-  },
-  tabStyle: {
-    fontSize: 10
   },
   iconStyle: {
     paddingRight: 5,

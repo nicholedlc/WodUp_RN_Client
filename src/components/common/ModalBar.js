@@ -7,16 +7,6 @@ const ModalBar = (props) => {
   return (
     <View style={styles.modalButtonContainerStyle}>
       {props.children}
-      {/* <Button
-        color='#67bec9'
-        title='Cancel'
-        onPress={() => this.resetDate()}
-      />
-      <Button
-        color='#67bec9'
-        title='Done'
-        onPress={() => openModal(false)}
-      /> */}
     </View>
   );
 }
