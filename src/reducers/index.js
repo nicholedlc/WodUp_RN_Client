@@ -5,6 +5,7 @@ import showExercise from './ShowExerciseReducer';
 import logId from './ShowLogReducer';
 import newExercise from './NewExerciseReducer';
 import newLog from './NewLogReducer';
+import logIn from './LogInReducer'
 
 export default combineReducers({
   exercisesIndex,
@@ -12,5 +13,6 @@ export default combineReducers({
   showExercise,
   logId,
   newExercise,
-  newLog
+  newLog,
+  logIn
 });

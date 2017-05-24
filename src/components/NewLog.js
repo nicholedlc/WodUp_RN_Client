@@ -35,7 +35,7 @@ class NewLog extends Component {
   // TODO: resetDate should return the previous input date rather than today's date
 
   resetDate () {
-    const today = this.props.date;
+    const today = new Date();
     this.props.inputLog({ key: 'date', val: today });
     return this.props.openModal(false);
   }
@@ -55,7 +55,7 @@ class NewLog extends Component {
           >
           <ModalBar>
             <ModalBarButton
-              title='Cancel'
+              title='Today'
               onPress={() => this.resetDate()}
             />
             <ModalBarButton

@@ -82,4 +82,28 @@ const Exercise = {
   }
 };
 
-export { Exercise };
+const User = {
+  authorize ({ email, password }) {
+    return (
+      fetch (`${BASE_URL}/auth/login`, {
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          email,
+          password
+        })
+      })
+        .then(response => {
+          if (!response.ok) throw Error(response.statusText);
+          return response.json();
+        })
+        .catch(errorMessage => console.error(errorMessage))
+    );
+  }
+
+}
+
+export { Exercise, User };

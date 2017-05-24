@@ -3,31 +3,44 @@ import { TextInput, View, Text } from 'react-native';
 
 const FormField = ({
   label,
+  style,
+  // ref,
   value,
-  onChangeText,
+  placeholder,
+  secureTextEntry,
   keyboardType,
+  returnKeyType,
   autoCorrect,
+  autoCapitalize,
   multiline,
   numberOfLines,
   maxLength,
-  style,
-  editable
+  editable,
+  onChangeText,
+  blurOnSubmit,
+  onSubmitEditing
 }) => {
   const { textInputStyle, labelStyle, containerStyle } = styles;
   return (
     <View style={containerStyle}>
       <Text style={labelStyle}>{label}</Text>
       <TextInput
-        autoCorrect={false}
         style={[textInputStyle, style]}
-        onChangeText={onChangeText}
+        // ref={ref}
         value={value}
+        placeholder={placeholder}
+        secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
-        autoCorrect={autoCorrect}
+        returnKeyType={returnKeyType}
+        autoCorrect={false}
+        autoCapitalize='none'
         multiline={multiline}
         numberOfLines={numberOfLines}
         maxLength={maxLength}
         editable={editable}
+        onChangeText={onChangeText}
+        blurOnSubmit={blurOnSubmit}
+        onSubmitEditing={onSubmitEditing}
       />
     </View>
   );
