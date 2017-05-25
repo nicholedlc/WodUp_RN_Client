@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Icon } from 'native-base';
+import { COLOR_TERNARY, BACKGROUND_TERNARY } from '../../styles/common';
 import { CardSection } from './common';
 import { selectExercise } from '../actions';
 
@@ -32,13 +33,13 @@ const styles = {
     alignItems: 'center'
   },
   textStyle: {
-    color: '#696969',
+    color: `${COLOR_TERNARY}`,
     fontSize: 15,
     paddingLeft: 5
   },
   iconStyle: {
     paddingRight: 5,
-    color: 'gainsboro',
+    color: `${BACKGROUND_TERNARY}`,
     fontSize: 15
   }
 }

@@ -15,3 +15,4 @@ export * from './ModalContent';
 export * from './ButtonPrimary';
 export * from './ThumbnailPrimary';
 export * from './ThumbnailSecondary';
+export * from './ProfilePic';

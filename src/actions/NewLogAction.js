@@ -10,8 +10,6 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { Exercise } from '../fetches';
 
-const BASE_URL = 'http://localhost:3636';
-
 const newLogSucceeded = log => {
   return {
     type: NEW_LOG_SUCCEEDED,

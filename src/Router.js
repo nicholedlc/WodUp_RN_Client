@@ -22,6 +22,21 @@ const RouterComponent = () => {
       backButtonTextStyle={buttonTextStyle}
       rightButtonTextStyle={buttonTextStyle}
     >
+      <Scene key='auth'>
+        <Scene
+          key='logIn'
+          component={LogIn}
+          // rightTitle='Sign Up'
+          // onRight={() => Actions.signUps()}
+          leftTitle='Exercises'
+          leftButtonTextStyle={buttonTextStyle}
+          onLeft={() => Actions.main()}
+        />
+        <Scene
+          key='showProfile'
+          component={ShowProfile}
+        />
+      </Scene>
       <Scene key='main'>
         <Scene
           key='exercisesIndex'
@@ -48,21 +63,6 @@ const RouterComponent = () => {
           component={NewLog}
         />
       </Scene>
-      <Scene key='auth'>
-        <Scene
-          key='logIn'
-          component={LogIn}
-          // rightTitle='Sign Up'
-          // onRight={() => Actions.signUps()}
-          leftTitle='Exercises'
-          leftButtonTextStyle={buttonTextStyle}
-          onLeft={() => Actions.main()}
-        />
-      </Scene>
-      <Scene
-        key='showProfile'
-        component={ShowProfile}
-      />
     </Router>
   );
 }

@@ -33,6 +33,7 @@ class NewLog extends Component {
   }
 
   // TODO: resetDate should return the previous input date rather than today's date
+  // TODO: allow user to enter and display weight in pounds
 
   resetDate () {
     const today = new Date();

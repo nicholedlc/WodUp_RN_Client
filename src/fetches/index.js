@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob';
 
 const BASE_URL = 'http://localhost:3636/api';
@@ -97,13 +98,19 @@ const User = {
         })
       })
         .then(response => {
-          if (!response.ok) throw Error(response.statusText);
+          if (!response.ok) throw Error(response.status);
           return response.json();
         })
-        .catch(errorMessage => console.error(errorMessage))
+        // .catch(console.error)
     );
-  }
+  },
 
-}
+  getProfile () {
+    console.log(AsyncStorage);
+    return AsyncStorage.getItem('JWT', (error, result) => {
+      console.log({ error, result })
+    });
+  }
+};
 
 export { Exercise, User };

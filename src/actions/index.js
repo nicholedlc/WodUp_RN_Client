@@ -5,3 +5,4 @@ export * from './ShowLogAction';
 export * from './NewExerciseAction';
 export * from './NewLogAction';
 export * from './LogInAction';
+export * from './ShowProfileAction';

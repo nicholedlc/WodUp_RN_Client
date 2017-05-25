@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { AsyncStorage, View, Text } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Container, Content } from 'native-base';
 import { connect } from 'react-redux';
-import { inputLogIn, resetLogInForm, submitLogIn } from '../actions';
-import { Card, CardSection, FormField, ButtonPrimary } from './common';
+import { inputLogIn, resetLogInForm, submitLogIn, loading } from '../actions';
+import { SubHeader, Card, CardSection, FormField, ButtonPrimary, Spinner } from './common';
 
 class LogIn extends Component {
-  componentDidMount () {
-    return this.props.resetLogInForm();
-  }
+  // componentDidMount () {
+  //   return AsyncStorage.getItem('JWT', (error, token) => {
+  //     console.log({ error, token })
+  //     if (token) {
+  //       return Actions.showProfile();
+  //     }
+  //     return this.props.resetLogInForm();
+  //   });
+  // }
 
   onSubmit () {
     const { email, password, submitLogIn } = this.props;
-    console.log(email, password);
     return this.props.submitLogIn({ email, password })
   }
 
   renderButton () {
-    // if (this.props.loading) {
-    //   return <Spinner />
-    // }
+    if (this.props.loading) {
+      return <Spinner />
+    }
     return (
       <ButtonPrimary
         title='Submit'
@@ -32,6 +38,9 @@ class LogIn extends Component {
     const { inputLogIn, email, password } = this.props;
     return (
       <View style={{flex: 1}}>
+        <SubHeader>
+          <Text>Log In</Text>
+        </SubHeader>
         <Card>
           <CardSection>
             <FormField
@@ -73,7 +82,8 @@ class LogIn extends Component {
 }
 
 const mapStateToProps = state => {
-  return { email, password } = state.logIn
+  console.log(state.logIn)
+  return { email, password, user } = state.logIn
 }
 
-export default connect(mapStateToProps, { inputLogIn, resetLogInForm, submitLogIn })(LogIn);
+export default connect(mapStateToProps, { inputLogIn, resetLogInForm, submitLogIn, loading })(LogIn);
