@@ -105,11 +105,39 @@ const User = {
     );
   },
 
+  // export const submitLogIn = ({ email, password }) => {
+  //   return async dispatch => {
+  //     try {
+  //       dispatch({ type: LOGIN_LOADING });
+  //       const json = await User.authorize({ email, password });
+  //       await AS.setItem('JWT', json.token);
+  //       dispatch(logInSucceeded({ user: json.user }));
+  //       Actions.showProfile();
+  //       dispatch(resetLogInForm());
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // }
+
   getProfile () {
-    console.log(AsyncStorage);
-    return AsyncStorage.getItem('JWT', (error, result) => {
-      console.log({ error, result })
-    });
+    return (
+      AsyncStorage.getItem('JWT', (error, token) => token)
+      .then(token => {
+        return fetch (`${BASE_URL}/profile`, {
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': `JWT ${token}`
+          },
+          method: 'GET'
+        })
+      })
+      .then(response => {
+        if (!response.ok) throw Error(response.status);
+        return response.json()
+      })
+    );
   }
 };
 

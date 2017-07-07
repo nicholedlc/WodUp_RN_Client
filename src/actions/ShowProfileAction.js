@@ -24,7 +24,11 @@ export const showProfileInfo = ()=> {
     dispatch({ type: PROFILE_LOADING });
     return (
       User.getProfile()
-
-    );
+      .then(profile => dispatch(profileSucceeded(profile)))
+      .catch(errorMessage => {
+        console.error(errorMessage);
+        return dispatch(profileFailed(errorMessage))
+      })
+    )
   }
 }

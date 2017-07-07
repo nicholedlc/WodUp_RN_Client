@@ -21,44 +21,43 @@ export const resetLogInForm = () => {
 }
 
 const logInSucceeded = user => {
-  console.log(user)
   return {
     type: LOGIN_SUCCEEDED,
     user
   };
 }
 
-// export const submitLogIn = ({ email, password }) => {
-//   return async dispatch => {
-//     try {
-//       dispatch({ type: LOGIN_LOADING });
-//       const json = await User.authorize({ email, password });
-//       await AS.setItem('JWT', json.token);
-//       dispatch(logInSucceeded({ user: json.user }));
-//       Actions.showProfile();
-//       dispatch(resetLogInForm());
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// }
-
 export const submitLogIn = ({ email, password }) => {
-  return dispatch => {
-    dispatch({ type: LOGIN_LOADING });
-    return (
-      User.authorize({ email, password })
-        .then(json => {
-          AS.setItem('JWT', json.token,  () => {
-            return dispatch(logInSucceeded({ user: json.user }));
-          })
-        })
-        .then(() => Actions.showProfile())
-        .then(() => dispatch(resetLogInForm()))
-        .catch(e => {
-          console.error(e);
-          // return dispatch(logInFailed(errorMessage))
-        })
-    );
+  return async dispatch => {
+    try {
+      dispatch({ type: LOGIN_LOADING });
+      const json = await User.authorize({ email, password });
+      await AS.setItem('JWT', json.token);
+      dispatch(logInSucceeded({ user: json.user }));
+      Actions.showProfile();
+      dispatch(resetLogInForm());
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
+
+// export const submitLogIn = ({ email, password }) => {
+//   return dispatch => {
+//     dispatch({ type: LOGIN_LOADING });
+//     return (
+//       User.authorize({ email, password })
+//         .then(json => {
+//           AS.setItem('JWT', json.token,  () => {
+//             return dispatch(logInSucceeded({ user: json.user }));
+//           })
+//         })
+//         .then(() => Actions.showProfile())
+//         .then(() => dispatch(resetLogInForm()))
+//         .catch(e => {
+//           console.error(e);
+//           // return dispatch(logInFailed(errorMessage))
+//         })
+//     );
+//   }
+// }

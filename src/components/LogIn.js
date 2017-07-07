@@ -6,17 +6,9 @@ import { connect } from 'react-redux';
 import { inputLogIn, resetLogInForm, submitLogIn, loading } from '../actions';
 import { SubHeader, Card, CardSection, FormField, ButtonPrimary, Spinner } from './common';
 
-class LogIn extends Component {
-  // componentDidMount () {
-  //   return AsyncStorage.getItem('JWT', (error, token) => {
-  //     console.log({ error, token })
-  //     if (token) {
-  //       return Actions.showProfile();
-  //     }
-  //     return this.props.resetLogInForm();
-  //   });
-  // }
+// TODO: Add refs prop to FormField and next button on the keyboard
 
+class LogIn extends Component {
   onSubmit () {
     const { email, password, submitLogIn } = this.props;
     return this.props.submitLogIn({ email, password })
@@ -82,8 +74,7 @@ class LogIn extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.logIn)
-  return { email, password, user } = state.logIn
+  return { email, password } = state.logIn
 }
 
 export default connect(mapStateToProps, { inputLogIn, resetLogInForm, submitLogIn, loading })(LogIn);
