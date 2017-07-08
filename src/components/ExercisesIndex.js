@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Container } from 'native-base';
 import { getExercises } from '../actions';
 import ExerciseItem from './ExerciseItem';
-import { TopNav, CardSection, Spinner, ErrorMessage, BottomNav } from './common';
+import { BaseContainer, TopNav, CardSection, Spinner, ErrorMessage, BottomNav } from './common';
 
 class ExercisesIndex extends Component {
   componentDidMount () {
@@ -25,13 +25,13 @@ class ExercisesIndex extends Component {
     }
     return (
       <Container>
-        <Container style={{flex: 1}}>
+        <BaseContainer>
           <ListView
             dataSource={exercises}
             renderRow={this.renderExercise}
             enableEmptySections
           />
-        </Container>
+        </BaseContainer>
         {/* <BottomNav /> */}
       </Container>
     );

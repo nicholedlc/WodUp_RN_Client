@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ListView, View, Text } from 'react-native';
-import { BottomNav, CardSection, Spinner, ErrorMessage, SubHeader } from './common';
+import { BaseContainer, BottomNav, CardSection, Spinner, ErrorMessage, SubHeader } from './common';
 import { connect } from 'react-redux';
 import { Container } from 'native-base';
 import { getLogs } from '../actions';
@@ -29,14 +29,14 @@ class ShowExercise extends Component {
       <Container>
         <SubHeader>{exercise.name}</SubHeader>
 
-        <Container style={{flex: 1}}>
+        <BaseContainer>
           <ListView
             dataSource={logs}
             renderRow={this.renderLog}
             enableEmptySections
           >
           </ListView>
-        </Container>
+        </BaseContainer>
 
         {/* <BottomNav /> */}
       </Container>

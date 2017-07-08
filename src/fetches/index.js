@@ -4,7 +4,6 @@ import RNFetchBlob from 'react-native-fetch-blob';
 const BASE_URL = 'http://localhost:3636/api';
 // const BASE_URL = 'http://daf99839.ngrok.io/api';
 
-
 const Exercise = {
   getAll () {
     return (

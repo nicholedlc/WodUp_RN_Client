@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Container, Content } from 'native-base';
 import { connect } from 'react-redux';
 import { inputLogIn, resetLogInForm, submitLogIn, loading } from '../actions';
-import { SubHeader, Card, CardSection, FormField, ButtonPrimary, Spinner } from './common';
+import { BaseContainer, SubHeader, Card, CardSection, FormField, ButtonPrimary, Spinner } from './common';
 
 // TODO: Add refs prop to FormField and next button on the keyboard
 
@@ -29,7 +29,7 @@ class LogIn extends Component {
   render () {
     const { inputLogIn, email, password } = this.props;
     return (
-      <View style={{flex: 1}}>
+      <BaseContainer>
         <SubHeader>
           <Text>Log In</Text>
         </SubHeader>
@@ -68,7 +68,7 @@ class LogIn extends Component {
           </Content>
           {/* <BottomNav /> */}
         </Container>
-      </View>
+      </BaseContainer>
     );
   }
 }

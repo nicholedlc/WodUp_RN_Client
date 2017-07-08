@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Dimensions, View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { showProfileInfo } from '../actions';
-import { SubHeader, Card, CardSection, Box, StatHeader, Stat, ProfilePic, Spinner, ErrorMessage } from './common';
+import { BaseContainer, SubHeader, Card, CardSection, Box, StatHeader, Stat, Avatar, Spinner, ErrorMessage, CoverPhoto } from './common';
+import { COLOR_SECONDARY, BACKGROUND_PRIMARY } from '../styles';
 
 class ShowProfile extends Component {
   componentDidMount () {
@@ -13,6 +14,7 @@ class ShowProfile extends Component {
     const { loading, errorMessage } = this.props;
     const { email, firstName, lastName } = this.props.user;
     const { age, gender, weight, height } = this.props.profile;
+    const { cardSectionStyle, bannerStyle, viewStyle, nameStyle, emailStyle} = styles;
     if (errorMessage) {
       return <ErrorMessage />
     }
@@ -20,25 +22,24 @@ class ShowProfile extends Component {
       return <Spinner />
     }
     return (
-      <View style={{flex: 1}}>
-        <Image
-          style={{ width: Dimensions.get('window').width, height: 250, opacity: 0.5, backgroundColor: '#67BEC9' }}
-          source={require('../../assets/images/barbell-1.jpg')} />
+      <BaseContainer>
+        <CoverPhoto
+          source={require('../../assets/images/barbell-1.jpg')}
+        />
 
-        <CardSection style={{height: 70}}>
-          <View style={{ alignSelf: 'flex-end', borderRadius: 50, borderWidth: 2, borderColor: 'white', zIndex: 5 }}>
-            <ProfilePic
-              source={require('../../assets/images/profile-pic.jpg')}
-              // TODO: Add ability to upload profile pic
-              style={{ borderWidth: 1, borderColor: 'white' }}
-            />
-          </View>
-          <View style={{ flex: 2 }}>
-            <View style={{ alignItems: 'flex-end' }}>
-              <Text style={{ fontSize: 25, color: '#002C31' }}>{`${firstName} ${lastName}`}</Text>
+        <CardSection style={cardSectionStyle}>
+          <Avatar
+            source={require('../../assets/images/profile-pic.jpg')}
+            // TODO: Add ability to upload profile pic
+          />
+          <View style={bannerStyle}>
+            <View style={viewStyle}>
+              <Text style={nameStyle}>
+                {`${firstName} ${lastName}`}
+              </Text>
             </View>
-            <View style={{ alignItems: 'flex-end' }}>
-              <Text style={{ alignItems: 'flex-end', color: '#696969' }}>{email}</Text>
+            <View style={viewStyle}>
+              <Text style={emailStyle}>{email}</Text>
             </View>
           </View>
         </CardSection>
@@ -63,8 +64,28 @@ class ShowProfile extends Component {
             </Box>
           </CardSection>
         </Card>
-      </View>
+      </BaseContainer>
     );
+  }
+}
+
+const styles = {
+  cardSectionStyle: {
+    height: 70
+  },
+  bannerStyle: {
+    flex: 2
+  },
+  viewStyle: {
+    alignItems: 'flex-end'
+  },
+  nameStyle: {
+    fontSize: 25,
+    color: COLOR_SECONDARY
+  },
+  emailStyle: {
+    alignItems: 'flex-end',
+    color: '#696969'
   }
 }
 

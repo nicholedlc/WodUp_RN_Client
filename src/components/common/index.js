@@ -15,4 +15,6 @@ export * from './ModalContent';
 export * from './ButtonPrimary';
 export * from './ThumbnailPrimary';
 export * from './ThumbnailSecondary';
-export * from './ProfilePic';
+export * from './Avatar';
+export * from './BaseContainer';
+export * from './CoverPhoto';

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text } from 'native-base';
 import { CardSection } from './CardSection';
+import { COLOR_SECONDARY } from '../../styles';
 
 const SubHeader = (props) => {
   return (
@@ -17,7 +18,7 @@ const styles = {
     justifyContent: 'center'
   },
   textStyle: {
-    color: '#002C31',
+    color: COLOR_SECONDARY,
     fontSize: 18
   }
 }
