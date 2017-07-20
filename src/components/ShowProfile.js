@@ -11,8 +11,7 @@ class ShowProfile extends Component {
   }
 
   render () {
-    const { loading, errorMessage } = this.props;
-    const { email, firstName, lastName } = this.props.user;
+    const { firstName, lastName, email, loading, errorMessage } = this.props;
     const { age, gender, weight, height } = this.props.profile;
     const { cardSectionStyle, bannerStyle, viewStyle, nameStyle, emailStyle} = styles;
     if (errorMessage) {
@@ -90,13 +89,8 @@ const styles = {
 }
 
 const mapStateToProps = state => {
-  const { profile, errorMessage, loading } = state.showProfile;
-  return {
-    user: state.logIn.user,
-    profile,
-    loading,
-    errorMessage
-  };
+  const { firstName, lastName, email, profile, errorMessage, loading } = state.showProfile;
+  return { firstName, lastName, email, profile, loading, errorMessage };
 }
 
 export default connect(mapStateToProps, { showProfileInfo })(ShowProfile);

@@ -8,7 +8,10 @@ import NewExercise from './components/NewExercise';
 import ShowExercise from './components/ShowExercise';
 import NewLog from './components/NewLog';
 import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
 import ShowProfile from './components/ShowProfile';
+
+// TODO: debug back button
 
 const RouterComponent = () => {
   const { sceneStyle, navigationBarStyle, titleStyle, buttonTextStyle } = styles;
@@ -16,9 +19,10 @@ const RouterComponent = () => {
     <Router
       sceneStyle={sceneStyle}
       title='WODUP!'
-      backTitle='Back'
       navigationBarStyle={navigationBarStyle}
       titleStyle={titleStyle}
+      backButtonImage={null}
+      backTitle='Back'
       backButtonTextStyle={buttonTextStyle}
       rightButtonTextStyle={buttonTextStyle}
     >
@@ -26,15 +30,20 @@ const RouterComponent = () => {
         <Scene
           key='logIn'
           component={LogIn}
-          // rightTitle='Sign Up'
-          // onRight={() => Actions.signUps()}
-          leftTitle='Exercises'
-          leftButtonTextStyle={buttonTextStyle}
-          onLeft={() => Actions.main()}
+          rightTitle='Sign Up'
+          onRight={() => Actions.signUp()}
+        />
+        <Scene
+          key='signUp'
+          component={SignUp}
+          rightTitle='Log In'
+          onRight={() => Actions.logIn()}
         />
         <Scene
           key='showProfile'
           component={ShowProfile}
+          rightTitle='Exercises'
+          onRight={() => Actions.main()}
         />
       </Scene>
       <Scene key='main'>
@@ -43,9 +52,9 @@ const RouterComponent = () => {
           component={ExercisesIndex}
           rightTitle='Add'
           onRight={() => Actions.createNewExercise()}
-          leftTitle='Log In'
-          leftButtonTextStyle={buttonTextStyle}
-          onLeft={() => Actions.auth()}
+          // leftTitle='SignOut'
+          // leftButtonTextStyle={buttonTextStyle}
+          // onLeft={() => Actions.signOut()}
         />
         <Scene
           key='createNewExercise'

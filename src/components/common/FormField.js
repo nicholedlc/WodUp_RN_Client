@@ -51,15 +51,15 @@ const styles = {
     color: '#000',
     paddingRight: 5,
     paddingLeft: 5,
-    fontSize: 15,
+    fontSize: 13,
     lineHeight: 100,
     flex: 2
   },
   labelStyle: {
-    fontSize: 15,
+    fontSize: 13,
     color: '#696969',
     paddingLeft: 10,
-    flex: 1
+    flex: 1.2
   },
   containerStyle: {
     height: 30,

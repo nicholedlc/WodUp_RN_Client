@@ -6,3 +6,4 @@ export * from './NewExerciseAction';
 export * from './NewLogAction';
 export * from './LogInAction';
 export * from './ShowProfileAction';
+export * from './SignUpAction';

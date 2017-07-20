@@ -19,7 +19,7 @@ const INITIAL_STATE = {
   uri: null,
   loading: false,
   errorMessage: ''
-}
+};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {

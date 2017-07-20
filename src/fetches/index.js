@@ -83,6 +83,11 @@ const Exercise = {
 };
 
 const User = {
+  create ({ signUp }) {
+    return
+    // fetch
+  },
+
   authorize ({ email, password }) {
     return (
       fetch (`${BASE_URL}/auth/login`, {

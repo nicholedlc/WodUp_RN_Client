@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import { AsyncStorage, View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Container, Content } from 'native-base';
+import { Content } from 'native-base';
 import { connect } from 'react-redux';
-import { inputLogIn, resetLogInForm, submitLogIn, loading } from '../actions';
 import { BaseContainer, SubHeader, Card, CardSection, FormField, ButtonPrimary, Spinner } from './common';
+import { inputLogIn, resetLogInForm, submitLogIn, loading } from '../actions';
 
 // TODO: Add refs prop to FormField and next button on the keyboard
 
 class LogIn extends Component {
+  componentDidMount () {
+    AsyncStorage.getItem('JWT')
+    .then(token => {
+      if (token) {
+        return Actions.showProfile();
+      }
+    }, error => console.log(error));
+  }
+
   onSubmit () {
     const { email, password, submitLogIn } = this.props;
     return this.props.submitLogIn({ email, password })
@@ -25,6 +34,8 @@ class LogIn extends Component {
       />
     );
   }
+
+// TODO: Not yet a user? Sign Up!
 
   render () {
     const { inputLogIn, email, password } = this.props;
@@ -60,14 +71,12 @@ class LogIn extends Component {
           </CardSection>
         </Card>
 
-        <Container>
-          <Content>
-            <Content padder />
-            {this.renderButton()}
-            <Content padder />
-          </Content>
-          {/* <BottomNav /> */}
-        </Container>
+        <Content>
+          <Content padder />
+          {this.renderButton()}
+          <Content padder />
+        </Content>
+        {/* <BottomNav /> */}
       </BaseContainer>
     );
   }

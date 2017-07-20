@@ -27,6 +27,8 @@ class NewExercise extends Component {
     );
   }
 
+  // TODO: validate presence of exercise name
+
   render () {
     const { text } = this.props;
     return (
@@ -38,6 +40,7 @@ class NewExercise extends Component {
               label='Name'
               value={text}
               autoCorrect={false}
+              placeholder='e.g. Squat'
               onChangeText={() => this.onTextInput()}
             />
           </CardSection>

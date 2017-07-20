@@ -7,6 +7,7 @@ import newExercise from './NewExerciseReducer';
 import newLog from './NewLogReducer';
 import logIn from './LogInReducer';
 import showProfile from './ShowProfileReducer';
+import signUp from './SignUpReducer';
 
 export default combineReducers({
   exercisesIndex,
@@ -16,5 +17,6 @@ export default combineReducers({
   newExercise,
   newLog,
   logIn,
-  showProfile
+  showProfile,
+  signUp
 });
