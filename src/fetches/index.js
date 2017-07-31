@@ -83,9 +83,28 @@ const Exercise = {
 };
 
 const User = {
-  create ({ signUp }) {
-    return
-    // fetch
+  createOne ({ signUp }) {
+    const { firstName, lastName, email, password, passwordConfirmation } = signUp;
+    return (
+      fetch(`${BASE_URL}/auth/signup`, {
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+          passwordConfirmation
+        })
+      })
+      .then(response => {
+        if (!response.ok) throw Error(response.status);
+        return response.json();
+      })
+    );
   },
 
   authorize ({ email, password }) {
@@ -105,7 +124,7 @@ const User = {
           if (!response.ok) throw Error(response.status);
           return response.json();
         })
-        // .catch(console.error)
+        .catch(console.error)
     );
   },
 

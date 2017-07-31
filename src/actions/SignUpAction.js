@@ -1,4 +1,6 @@
-import { INPUT_USER } from './types';
+import { AsyncStorage } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { INPUT_USER, SIGNUP_LOADING, SIGNUP_SUCCEEDED, RESET_SIGNUP_FORM } from './types';
 import { User } from '../fetches';
 
 export const inputUser = ({ key, val }) => {
@@ -8,12 +10,31 @@ export const inputUser = ({ key, val }) => {
   }
 };
 
+export const resetSignUpForm = () => {
+  return {
+    type: RESET_SIGNUP_FORM
+  };
+}
+
+const signUpSucceeded = user => {
+  return {
+    type: SIGNUP_SUCCEEDED,
+    user
+  }
+}
+
 export const createUser = ({ signUp }) => {
+  const AS = AsyncStorage;
   return async dispatch => {
     try {
-      // dispatch({ type: NEW_USER_LOADING });
-      const newUser = await User.create({ signUp });
-      console.log(newUser);
+      // await AS.removeItem('JWT', (err, res) => console.log(res));
+      dispatch({ type: SIGNUP_LOADING });
+      const json = await User.createOne({ signUp });
+      await AS.setItem('JWT', json.token);
+      const token = await AS.getItem('JWT', (err, res) => console.log(res));
+      dispatch(resetSignUpForm());
+      dispatch(signUpSucceeded(json.user));
+      Actions.main();
     } catch (error) {
       console.log(error);
     }

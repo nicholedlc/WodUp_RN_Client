@@ -3,12 +3,16 @@ import { connect } from 'react-redux';
 import { AsyncStorage, Text } from 'react-native';
 import { Content } from 'native-base';
 import { BaseContainer, SubHeader, Card, CardSection, FormField, ButtonPrimary } from './common';
-import { inputUser, createUser } from '../actions';
+import { inputUser, createUser, resetSignUpForm } from '../actions';
 
 // TODO: REFACTOR: use the same action for inputText, loading, failure
 // TODO: REFACTOR: do not destructure all state variables?
 
 class SignUp extends Component {
+  componentDidMount () {
+    return this.props.resetSignUpForm();
+  };
+
   onSubmit () {
     const { signUp, createUser } = this.props;
     createUser({ signUp });
@@ -101,8 +105,7 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return { signUp } = state;
 }
 
-export default connect(mapStateToProps, { inputUser, createUser })(SignUp);
+export default connect(mapStateToProps, { inputUser, createUser, resetSignUpForm })(SignUp);
