@@ -6,8 +6,6 @@ import { Container } from 'native-base';
 import { getLogs } from '../actions';
 import ShowLog from './ShowLog';
 
-const BASE_URL = 'http://localhost:3636';
-
 class ShowExercise extends Component {
   componentDidMount () {
     this.props.getLogs(this.props.exercise.id)
