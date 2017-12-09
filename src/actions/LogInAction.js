@@ -34,7 +34,7 @@ export const submitLogIn = ({ email, password }) => {
       const json = await User.authorize({ email, password });
       await AS.setItem('JWT', json.token);
       dispatch(logInSucceeded({ user: json.user }));
-      Actions.showProfile();
+      Actions.userProfile();
       dispatch(resetLogInForm());
     } catch (error) {
       console.log(error);

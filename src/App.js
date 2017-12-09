@@ -6,6 +6,8 @@ import { Container } from 'native-base';
 import Router from './Router';
 import configureStore from './store/configureStore';
 import ExercisesIndex from './components/ExercisesIndex';
+import { BottomNav } from './components/common/BottomNav';
+import { AsyncStorage } from 'react-native';
 
 const store = configureStore(); // can also pass an initial state here
 
@@ -17,6 +19,7 @@ const App = () => {
           barStyle='light-content'
         />
         <Router />
+        <BottomNav />
       </Container>
     </Provider>
   );

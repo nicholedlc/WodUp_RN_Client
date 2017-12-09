@@ -8,7 +8,7 @@ import { User } from '../fetches';
 const profileSucceeded = profile => {
   return {
     type: PROFILE_SUCCEEDED,
-    profile
+    profile//: {profile: null, firstName: "Nichole", lastName: "De La Cruz", email: "ndlc@gmail.com"}
   }
 }
 
@@ -24,7 +24,10 @@ export const showProfileInfo = ()=> {
     dispatch({ type: PROFILE_LOADING });
     return (
       User.getProfile()
-      .then(profile => dispatch(profileSucceeded(profile)))
+      .then(profile => {
+        // {profile: null, firstName: "Nichole", lastName: "De La Cruz", email: "ndlc@gmail.com"}
+        dispatch(profileSucceeded(profile));
+      })
       .catch(errorMessage => {
         console.error(errorMessage);
         return dispatch(profileFailed(errorMessage))

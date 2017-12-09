@@ -39,11 +39,13 @@ const RouterComponent = () => {
           rightTitle='Log In'
           onRight={() => Actions.logIn()}
         />
+      </Scene>
+      <Scene key='userProfile'>
         <Scene
           key='showProfile'
           component={ShowProfile}
-          rightTitle='Exercises'
-          onRight={() => Actions.main()}
+          // rightTitle='Exercises'
+          // onRight={() => Actions.main()}
         />
       </Scene>
       <Scene key='main'>

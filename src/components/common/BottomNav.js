@@ -7,12 +7,18 @@ const BottomNav = () => {
         <Content />
         <Footer >
           <FooterTab>
-            <Button vertical style={{ backgroundColor: '#002c31', borderRadius: 0 }}>
+            <Button
+              vertical
+              style={{ backgroundColor: '#002c31', borderRadius: 0 }}
+              onPress={() => Actions.userProfile()}
+            >
               <Icon name="person" style={{ color: 'white' }} />
               <Text style={{ color: 'white' }}>Profile</Text>
             </Button>
-            <Button vertical style={{ backgroundColor: '#002c31', borderRadius: 0 }}
-              onPress={() => Actions.exercisesIndex()}
+            <Button
+              vertical
+              style={{ backgroundColor: '#002c31', borderRadius: 0 }}
+              onPress={() => Actions.main()}
             >
               <Icon name="speedometer" style={{ color: 'white' }} />
               <Text style={{ color: 'white' }}>Track</Text>

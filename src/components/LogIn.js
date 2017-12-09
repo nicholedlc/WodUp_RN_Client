@@ -11,9 +11,10 @@ import { inputLogIn, resetLogInForm, submitLogIn, loading } from '../actions';
 class LogIn extends Component {
   componentDidMount () {
     AsyncStorage.getItem('JWT')
+    // .then(token => AsyncStorage.removeItem('JWT'))
     .then(token => {
       if (token) {
-        return Actions.showProfile();
+        return Actions.userProfile();
       }
     }, error => console.log(error));
   }

@@ -12,7 +12,7 @@ class ShowProfile extends Component {
 
   render () {
     const { firstName, lastName, email, loading, errorMessage } = this.props;
-    const { age, gender, weight, height } = this.props.profile;
+    const { age, gender, weight, height } = this.props.profile || {};
     const { cardSectionStyle, bannerStyle, viewStyle, nameStyle, emailStyle} = styles;
     if (errorMessage) {
       return <ErrorMessage />
