@@ -1,7 +1,7 @@
 # WODUP! (Mobile Client)
 An IOS-focused mobile fitness app designed to track strength training metrics for the everyday athlete.
 
-Built with React Native, this SPA client communicates to an [Express based server](https://github.com/nicholedlc/wodup-server) with AJAX.
+Built with React Native, this SPA client communicates to an [Express based server](https://github.com/nicholedlc/wodup-backend) with AJAX.
 
 Currently in early development. Stay tuned...
 
@@ -17,7 +17,5 @@ Currently in early development. Stay tuned...
 3. Run the command:
 
   `yarn ios`
-
-4. Start the [server](https://github.com/nicholedlc/wodup-server)
 
 5. Smash some weights! 💪
