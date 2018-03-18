@@ -7,7 +7,7 @@ import {
   NEW_LOG_FAILED,
   RESET_NEW_LOG_FORM
 } from "./types";
-import { Actions } from "react-native-router-flux";
+import { Actions, ActionConst } from "react-native-router-flux";
 import { Exercise } from "../fetches";
 
 const newLogSucceeded = log => {
@@ -65,7 +65,7 @@ export const createLog = ({
     return Exercise.postImage({ exerciseId, date, rep, set, weight, note, uri })
       .then(log => dispatch(newLogSucceeded(log)))
       .then(() => dispatch(resetNewLogForm()))
-      .then(() => Actions.showExercise())
+      .then(() => Actions.showExercise({ type: ActionConst.RESET }))
       .catch(errorMessage => {
         console.error(errorMessage);
         return dispatch(newLogFailed(errorMessage));

@@ -1,5 +1,5 @@
 import React from "react";
-import { Scene, Router, Actions } from "react-native-router-flux";
+import { Scene, Router, Actions, ActionConst } from "react-native-router-flux";
 import { Icon } from "native-base";
 import {
   NAV_HEIGHT,
@@ -36,7 +36,7 @@ const RouterComponent = () => {
       backButtonTextStyle={buttonTextStyle}
       rightButtonTextStyle={buttonTextStyle}
     >
-      <Scene key="auth">
+      <Scene key="auth" type={ActionConst.RESET}>
         <Scene
           key="logIn"
           component={LogIn}
@@ -50,23 +50,15 @@ const RouterComponent = () => {
           onRight={() => Actions.logIn()}
         />
       </Scene>
-      <Scene key="userProfile">
-        <Scene
-          key="showProfile"
-          component={ShowProfile}
-          // rightTitle='Exercises'
-          // onRight={() => Actions.main()}
-        />
+      <Scene key="userProfile" type={ActionConst.RESET}>
+        <Scene key="showProfile" component={ShowProfile} />
       </Scene>
-      <Scene key="main">
+      <Scene key="main" type={ActionConst.RESET}>
         <Scene
           key="exercisesIndex"
           component={ExercisesIndex}
           rightTitle="Add"
           onRight={() => Actions.createNewExercise()}
-          // leftTitle='SignOut'
-          // leftButtonTextStyle={buttonTextStyle}
-          // onLeft={() => Actions.signOut()}
         />
         <Scene
           key="createNewExercise"

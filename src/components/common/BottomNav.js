@@ -26,7 +26,7 @@ const BottomNav = () => {
           <Button
             vertical
             style={{ backgroundColor: "#002c31", borderRadius: 0 }}
-            onPress={() => Actions.main()}
+            onPress={() => Actions.main({})}
           >
             <Icon name="speedometer" style={{ color: "white" }} />
             <Text style={{ color: "white" }}>Track</Text>
