@@ -57,7 +57,7 @@ class ShowLog extends Component {
             {imageUrl ? (
               <Image
                 style={imageStyle}
-                source={{ uri: `http://localhost:3636${imageUrl}` }}
+                source={{ uri: `http://localhost:4545${imageUrl}` }}
               />
             ) : (
               <Image
@@ -93,7 +93,7 @@ class ShowLog extends Component {
                 <View style={sectionHeaderStyle}>
                   {imageUrl ? (
                     <ThumbnailPrimary
-                      source={{ uri: `http://localhost:3636${imageUrl}` }}
+                      source={{ uri: `http://localhost:4545${imageUrl}` }}
                     />
                   ) : (
                     <ThumbnailSecondary

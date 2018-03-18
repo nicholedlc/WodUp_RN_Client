@@ -1,7 +1,8 @@
 import { AsyncStorage } from "react-native";
 import RNFetchBlob from "react-native-fetch-blob";
 
-const BASE_URL = "https://wodup-express.herokuapp.com/api";
+// const BASE_URL = "https://wodup-express.herokuapp.com/api";
+const BASE_URL = "http://localhost:4545/api";
 
 const Exercise = {
   getAll() {
