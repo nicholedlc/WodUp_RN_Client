@@ -1,5 +1,5 @@
-import React from 'react';
-import { TextInput, View, Text } from 'react-native';
+import React from "react";
+import { TextInput, View, Text } from "react-native";
 
 const FormField = ({
   label,
@@ -33,7 +33,7 @@ const FormField = ({
         keyboardType={keyboardType}
         returnKeyType={returnKeyType}
         autoCorrect={false}
-        autoCapitalize='none'
+        autoCapitalize="none"
         multiline={multiline}
         numberOfLines={numberOfLines}
         maxLength={maxLength}
@@ -48,7 +48,7 @@ const FormField = ({
 
 const styles = {
   textInputStyle: {
-    color: '#000',
+    color: "#000",
     paddingRight: 5,
     paddingLeft: 5,
     fontSize: 13,
@@ -57,16 +57,16 @@ const styles = {
   },
   labelStyle: {
     fontSize: 13,
-    color: '#696969',
+    color: "#696969",
     paddingLeft: 10,
     flex: 1.2
   },
   containerStyle: {
     height: 30,
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: "row",
+    alignItems: "center"
   }
 };
 
-export { FormField }
+export { FormField };

@@ -1,21 +1,28 @@
-import React, { Component } from 'react';
-import { ListView, View, Text } from 'react-native';
-import { BaseContainer, BottomNav, CardSection, Spinner, ErrorMessage, SubHeader } from './common';
-import { connect } from 'react-redux';
-import { Container } from 'native-base';
-import { getLogs } from '../actions';
-import ShowLog from './ShowLog';
+import React, { Component } from "react";
+import { ListView, View, Text } from "react-native";
+import {
+  BaseContainer,
+  BottomNav,
+  CardSection,
+  Spinner,
+  ErrorMessage,
+  SubHeader
+} from "./common";
+import { connect } from "react-redux";
+import { Container } from "native-base";
+import { getLogs } from "../actions";
+import ShowLog from "./ShowLog";
 
 class ShowExercise extends Component {
-  componentDidMount () {
-    this.props.getLogs(this.props.exercise.id)
+  componentDidMount() {
+    this.props.getLogs(this.props.exercise.id);
   }
 
-  renderLog (log) {
+  renderLog(log) {
     return <ShowLog log={log} />;
   }
 
-  render () {
+  render() {
     const { exercise, logs, errorMessage, loading } = this.props;
     if (errorMessage) {
       return <ErrorMessage />;
@@ -32,26 +39,21 @@ class ShowExercise extends Component {
             dataSource={logs}
             renderRow={this.renderLog}
             enableEmptySections
-          >
-          </ListView>
+          />
         </BaseContainer>
 
         {/* <BottomNav /> */}
       </Container>
-    )
-  };
+    );
+  }
 }
 
 const ds = new ListView.DataSource({
-  rowHasChanged: (r1,r2) => r1 !== r2
+  rowHasChanged: (r1, r2) => r1 !== r2
 });
 
 const mapStateToProps = state => {
-  const {
-    exercise: { logs },
-    errorMessage,
-    loading
-  } = state.showExercise;
+  const { exercise: { logs }, errorMessage, loading } = state.showExercise;
   return {
     exercise: state.exercise,
     logs: ds.cloneWithRows(logs || []),

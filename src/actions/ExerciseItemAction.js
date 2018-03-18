@@ -1,4 +1,4 @@
-import { SELECT_EXERCISE } from './types';
+import { SELECT_EXERCISE } from "./types";
 
 export const selectExercise = exercise => {
   return {

@@ -1,35 +1,36 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { View, Button } from 'react-native';
-import { Content
-} from 'native-base';
-import { Card, CardSection, FormField, SubHeader, BottomNav, ButtonPrimary } from './common';
-import { inputExercise, createExercise } from '../actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { View, Button } from "react-native";
+import { Content } from "native-base";
+import {
+  Card,
+  CardSection,
+  FormField,
+  SubHeader,
+  BottomNav,
+  ButtonPrimary
+} from "./common";
+import { inputExercise, createExercise } from "../actions";
 
 class NewExercise extends Component {
-  onTextInput (value) {
-    this.props.inputExercise(value)
+  onTextInput(value) {
+    this.props.inputExercise(value);
   }
 
-  onSubmit () {
+  onSubmit() {
     this.props.createExercise(this.props.text);
   }
 
-  renderButton () {
+  renderButton() {
     if (this.props.loading) {
-      return <Spinner />
+      return <Spinner />;
     }
-    return (
-      <ButtonPrimary
-        title='Submit'
-        onPress={() => this.onSubmit()}
-      />
-    );
+    return <ButtonPrimary title="Submit" onPress={() => this.onSubmit()} />;
   }
 
   // TODO: validate presence of exercise name
 
-  render () {
+  render() {
     const { text } = this.props;
     return (
       <View style={{ flex: 1 }}>
@@ -37,10 +38,10 @@ class NewExercise extends Component {
         <Card>
           <CardSection>
             <FormField
-              label='Name'
+              label="Name"
               value={text}
               autoCorrect={false}
-              placeholder='e.g. Squat'
+              placeholder="e.g. Squat"
               onChangeText={() => this.onTextInput()}
             />
           </CardSection>

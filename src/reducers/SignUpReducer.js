@@ -1,4 +1,9 @@
-import { INPUT_USER, SIGNUP_LOADING, SIGNUP_SUCCEEDED, RESET_SIGNUP_FORM } from '../actions/types';
+import {
+  INPUT_USER,
+  SIGNUP_LOADING,
+  SIGNUP_SUCCEEDED,
+  RESET_SIGNUP_FORM
+} from "../actions/types";
 
 const INITIAL_STATE = {
   firstName: null,
@@ -7,7 +12,7 @@ const INITIAL_STATE = {
   password: null,
   passwordConfirmation: null,
   loading: false,
-  errorMessage: ''
+  errorMessage: ""
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -15,11 +20,11 @@ export default (state = INITIAL_STATE, action) => {
     case INPUT_USER:
       return { ...state, [action.payload.key]: action.payload.val };
     case SIGNUP_LOADING:
-      return { ...state, loading: true, errorMessage: '' };
+      return { ...state, loading: true, errorMessage: "" };
     case SIGNUP_SUCCEEDED:
-      return { ...state, loading: false, errorMessage: '', ...action.user };
+      return { ...state, loading: false, errorMessage: "", ...action.user };
     case RESET_SIGNUP_FORM:
-      return { ...state, ...INITIAL_STATE }
+      return { ...state, ...INITIAL_STATE };
     default:
       return state;
   }

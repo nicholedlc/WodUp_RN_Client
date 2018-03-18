@@ -1,82 +1,89 @@
-import React from 'react';
-import { Scene, Router, Actions } from 'react-native-router-flux';
-import { Icon } from 'native-base';
-import { NAV_HEIGHT, BACKGROUND_PRIMARY, COLOR_PRIMARY, COLOR_SECONDARY } from './styles/common';
-import * as S from './styles/common'
-import ExercisesIndex from './components/ExercisesIndex';
-import NewExercise from './components/NewExercise';
-import ShowExercise from './components/ShowExercise';
-import NewLog from './components/NewLog';
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
-import ShowProfile from './components/ShowProfile';
+import React from "react";
+import { Scene, Router, Actions } from "react-native-router-flux";
+import { Icon } from "native-base";
+import {
+  NAV_HEIGHT,
+  BACKGROUND_PRIMARY,
+  COLOR_PRIMARY,
+  COLOR_SECONDARY
+} from "./styles/common";
+import * as S from "./styles/common";
+import ExercisesIndex from "./components/ExercisesIndex";
+import NewExercise from "./components/NewExercise";
+import ShowExercise from "./components/ShowExercise";
+import NewLog from "./components/NewLog";
+import LogIn from "./components/LogIn";
+import SignUp from "./components/SignUp";
+import ShowProfile from "./components/ShowProfile";
 
 // TODO: debug back button
 
 const RouterComponent = () => {
-  const { sceneStyle, navigationBarStyle, titleStyle, buttonTextStyle } = styles;
+  const {
+    sceneStyle,
+    navigationBarStyle,
+    titleStyle,
+    buttonTextStyle
+  } = styles;
   return (
     <Router
       sceneStyle={sceneStyle}
-      title='WODUP!'
+      title="WODUP!"
       navigationBarStyle={navigationBarStyle}
       titleStyle={titleStyle}
       backButtonImage={null}
-      backTitle='Back'
+      backTitle="Back"
       backButtonTextStyle={buttonTextStyle}
       rightButtonTextStyle={buttonTextStyle}
     >
-      <Scene key='auth'>
+      <Scene key="auth">
         <Scene
-          key='logIn'
+          key="logIn"
           component={LogIn}
-          rightTitle='Sign Up'
+          rightTitle="Sign Up"
           onRight={() => Actions.signUp()}
         />
         <Scene
-          key='signUp'
+          key="signUp"
           component={SignUp}
-          rightTitle='Log In'
+          rightTitle="Log In"
           onRight={() => Actions.logIn()}
         />
       </Scene>
-      <Scene key='userProfile'>
+      <Scene key="userProfile">
         <Scene
-          key='showProfile'
+          key="showProfile"
           component={ShowProfile}
           // rightTitle='Exercises'
           // onRight={() => Actions.main()}
         />
       </Scene>
-      <Scene key='main'>
+      <Scene key="main">
         <Scene
-          key='exercisesIndex'
+          key="exercisesIndex"
           component={ExercisesIndex}
-          rightTitle='Add'
+          rightTitle="Add"
           onRight={() => Actions.createNewExercise()}
           // leftTitle='SignOut'
           // leftButtonTextStyle={buttonTextStyle}
           // onLeft={() => Actions.signOut()}
         />
         <Scene
-          key='createNewExercise'
+          key="createNewExercise"
           component={NewExercise}
           onLeft={() => Actions.exercisesIndex()}
         />
         <Scene
-          key='showExercise'
+          key="showExercise"
           component={ShowExercise}
-          rightTitle='Add'
+          rightTitle="Add"
           onRight={() => Actions.createNewLog()}
         />
-        <Scene
-          key='createNewLog'
-          component={NewLog}
-        />
+        <Scene key="createNewLog" component={NewLog} />
       </Scene>
     </Router>
   );
-}
+};
 
 const styles = {
   sceneStyle: {
@@ -88,8 +95,8 @@ const styles = {
     height: 66
   },
   titleStyle: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
     fontSize: 20
   },
   buttonTextStyle: {

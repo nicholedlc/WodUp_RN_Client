@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   TouchableWithoutFeedback,
   View,
@@ -7,10 +7,10 @@ import {
   LayoutAnimation,
   ScrollView,
   Dimensions
-} from 'react-native';
-import { Icon } from 'native-base';
-import { connect } from 'react-redux';
-import moment from 'moment';
+} from "react-native";
+import { Icon } from "native-base";
+import { connect } from "react-redux";
+import moment from "moment";
 import {
   Card,
   CardSection,
@@ -19,72 +19,69 @@ import {
   Stat,
   ThumbnailPrimary,
   ThumbnailSecondary
-} from './common';
-import { showLogInfo } from '../actions';
-
+} from "./common";
+import { showLogInfo } from "../actions";
 
 class ShowLog extends Component {
-  componentWillUpdate () {
+  componentWillUpdate() {
     LayoutAnimation.easeInEaseOut();
   }
 
-  componentDidMount () {
+  componentDidMount() {
     return this.props.showLogInfo(null);
   }
 
-  toggleView () {
+  toggleView() {
     const { log, expanded, showLogInfo } = this.props;
     return expanded ? showLogInfo(null) : showLogInfo(log.id);
   }
 
-  expandContent () {
+  expandContent() {
     const { log: { note, imageUrl }, expanded } = this.props;
-    const { scrollViewStyle,
+    const {
+      scrollViewStyle,
       imageStyle,
       defaultImageStyle,
       noteLabelStyle,
       noteStyle
     } = styles;
-    if(expanded) {
+    if (expanded) {
       return (
-          <ScrollView
-            style={scrollViewStyle}
-            horizontal={true}
-            directionalLockEnabled={true}
-            pagingEnabled={true}
-          >
-            <View>
-              {imageUrl
-                ? <Image
-                    style={imageStyle}
-                    source={{uri: `http://localhost:3636${imageUrl}`}}
-                  />
-                : <Image
-                    style={[imageStyle, defaultImageStyle]}
-                    source={require('../../assets/images/dumbell.png')}
-                  />
-              }
-            </View>
-            <View style={imageStyle}>
-              <Text style={noteLabelStyle}>Notes</Text>
-              <Text style={noteStyle}>{note}</Text>
-            </View>
-          </ScrollView>
+        <ScrollView
+          style={scrollViewStyle}
+          horizontal={true}
+          directionalLockEnabled={true}
+          pagingEnabled={true}
+        >
+          <View>
+            {imageUrl ? (
+              <Image
+                style={imageStyle}
+                source={{ uri: `http://localhost:3636${imageUrl}` }}
+              />
+            ) : (
+              <Image
+                style={[imageStyle, defaultImageStyle]}
+                source={require("../../assets/images/dumbell.png")}
+              />
+            )}
+          </View>
+          <View style={imageStyle}>
+            <Text style={noteLabelStyle}>Notes</Text>
+            <Text style={noteStyle}>{note}</Text>
+          </View>
+        </ScrollView>
       );
     }
   }
 
-  render () {
+  render() {
     const {
-      log: {id, date, rep, set, weight, imageUrl },
+      log: { id, date, rep, set, weight, imageUrl },
       expanded
     } = this.props;
-    const {
-      sectionHeaderStyle,
-      dateStyle,
-      iconStyle,
-    } = styles;
-    const exerciseDate = moment(Date.parse(date)).format('ddd, MMMM Do YYYY');
+    const { sectionHeaderStyle, dateStyle, iconStyle } = styles;
+    const exerciseDate = moment(Date.parse(date)).format("ddd, MMMM Do YYYY");
 
     //TODO: Fix arrow icon centering
     return (
@@ -92,24 +89,21 @@ class ShowLog extends Component {
         <TouchableWithoutFeedback onPress={() => this.toggleView()}>
           <View>
             <Card>
-
               <CardSection>
                 <View style={sectionHeaderStyle}>
-                  {
-                    imageUrl
-                    ? <ThumbnailPrimary
-                      source={{uri: `http://localhost:3636${imageUrl}`}}
-                      />
-                    : <ThumbnailSecondary
-                      source={require('../../assets/images/dumbell.png')}
-                      />
-                  }
-                    <Text style={dateStyle}>
-                      {exerciseDate}
-                    </Text>
+                  {imageUrl ? (
+                    <ThumbnailPrimary
+                      source={{ uri: `http://localhost:3636${imageUrl}` }}
+                    />
+                  ) : (
+                    <ThumbnailSecondary
+                      source={require("../../assets/images/dumbell.png")}
+                    />
+                  )}
+                  <Text style={dateStyle}>{exerciseDate}</Text>
                 </View>
                 <Icon
-                  name={expanded ? 'arrow-down' : 'arrow-forward'}
+                  name={expanded ? "arrow-down" : "arrow-forward"}
                   style={iconStyle}
                 />
               </CardSection>
@@ -128,7 +122,6 @@ class ShowLog extends Component {
                   <Stat>{weight}</Stat>
                 </Box>
               </CardSection>
-
             </Card>
           </View>
         </TouchableWithoutFeedback>
@@ -141,28 +134,28 @@ class ShowLog extends Component {
 const styles = {
   sectionHeaderStyle: {
     flex: 0,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     paddingLeft: 5
   },
   dateStyle: {
     paddingLeft: 10,
-    color: '#696969',
+    color: "#696969",
     fontSize: 15
   },
   scrollViewStyle: {
-    backgroundColor: '#f7f7f6',
+    backgroundColor: "#f7f7f6",
     marginLeft: 5,
-    marginRight: 5,
+    marginRight: 5
   },
   imageStyle: {
     height: 300,
     maxHeight: 365,
-    width: Dimensions.get('window').width - 10,
-    borderColor: '#ddd',
+    width: Dimensions.get("window").width - 10,
+    borderColor: "#ddd",
     borderWidth: 1,
-    borderTopWidth: 0,
+    borderTopWidth: 0
   },
   defaultImageStyle: {
     opacity: 0.1
@@ -170,11 +163,11 @@ const styles = {
   iconStyle: {
     paddingRight: 5,
     fontSize: 15,
-    color: 'gainsboro'
+    color: "gainsboro"
   },
   noteLabelStyle: {
     fontSize: 15,
-    color: '#1c4951',
+    color: "#1c4951",
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 10,
@@ -182,16 +175,16 @@ const styles = {
   },
   noteStyle: {
     fontSize: 15,
-    color: '#696969',
+    color: "#696969",
     paddingBottom: 10,
     paddingLeft: 10,
     paddingRight: 10
   }
-}
+};
 
 const mapStateToProps = (state, ownProps) => {
   const expanded = state.logId === ownProps.log.id;
-  return { expanded }
-}
+  return { expanded };
+};
 
 export default connect(mapStateToProps, { showLogInfo })(ShowLog);

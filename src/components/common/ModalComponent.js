@@ -1,6 +1,6 @@
-import React from 'react';
-import { Modal, View, TouchableWithoutFeedback } from 'react-native';
-import { ModalBar, ModalContent } from './ModalBar';
+import React from "react";
+import { Modal, View, TouchableWithoutFeedback } from "react-native";
+import { ModalBar, ModalContent } from "./ModalBar";
 
 const ModalComponent = props => {
   return (
@@ -14,17 +14,15 @@ const ModalComponent = props => {
           <View style={{ flex: 1 }} />
         </TouchableWithoutFeedback>
 
-        <View>
-          {props.children}
-        </View>
+        <View>{props.children}</View>
       </View>
     </Modal>
   );
-}
+};
 
 const styles = {
   modalViewStyle: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     flex: 1
   }
 };

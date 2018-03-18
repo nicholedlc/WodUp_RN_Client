@@ -1,13 +1,13 @@
-import { AsyncStorage as AS } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { AsyncStorage as AS } from "react-native";
+import { Actions } from "react-native-router-flux";
 import {
   INPUT_LOGIN,
   RESET_LOGIN_FORM,
   SUBMIT_LOGIN,
   LOGIN_LOADING,
   LOGIN_SUCCEEDED
-} from './types';
-import { User } from '../fetches';
+} from "./types";
+import { User } from "../fetches";
 
 export const inputLogIn = ({ key, value }) => {
   return {
@@ -17,30 +17,30 @@ export const inputLogIn = ({ key, value }) => {
 };
 
 export const resetLogInForm = () => {
-  return { type: RESET_LOGIN_FORM }
-}
+  return { type: RESET_LOGIN_FORM };
+};
 
 const logInSucceeded = user => {
   return {
     type: LOGIN_SUCCEEDED,
     user
   };
-}
+};
 
 export const submitLogIn = ({ email, password }) => {
   return async dispatch => {
     try {
       dispatch({ type: LOGIN_LOADING });
       const json = await User.authorize({ email, password });
-      await AS.setItem('JWT', json.token);
+      await AS.setItem("JWT", json.token);
       dispatch(logInSucceeded({ user: json.user }));
       Actions.userProfile();
       dispatch(resetLogInForm());
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};
 
 // export const submitLogIn = ({ email, password }) => {
 //   return dispatch => {

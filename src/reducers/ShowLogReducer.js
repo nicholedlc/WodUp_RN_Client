@@ -1,4 +1,4 @@
-import { SHOW_LOG_INFO } from '../actions/types';
+import { SHOW_LOG_INFO } from "../actions/types";
 
 export default (state = null, action) => {
   switch (action.type) {
@@ -7,4 +7,4 @@ export default (state = null, action) => {
     default:
       return state;
   }
-}
+};

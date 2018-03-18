@@ -1,21 +1,19 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React from "react";
+import { View, Text } from "react-native";
 
-const Stat = (props) => {
+const Stat = props => {
   return (
     <View>
-      <Text style={styles.textStyle}>
-        {props.children || '-'}
-      </Text>
+      <Text style={styles.textStyle}>{props.children || "-"}</Text>
     </View>
   );
-}
+};
 
 const styles = {
   textStyle: {
     fontSize: 25,
-    color: '#34a9b7'
+    color: "#34a9b7"
   }
-}
+};
 
 export { Stat };

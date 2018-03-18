@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   TouchableWithoutFeedback,
   DatePickerIOS,
   View,
   Text,
   Image
-} from 'react-native';
-import { Container, Content } from 'native-base';
-import moment from 'moment';
+} from "react-native";
+import { Container, Content } from "native-base";
+import moment from "moment";
 import {
   Card,
   CardSection,
@@ -23,52 +23,48 @@ import {
   ModalContent,
   ButtonPrimary,
   ThumbnailPrimary
-} from './common';
-import { openModal, inputLog, createLog, resetNewLogForm } from '../actions';
-import PickImage from './PickImage';
+} from "./common";
+import { openModal, inputLog, createLog, resetNewLogForm } from "../actions";
+import PickImage from "./PickImage";
 
 class NewLog extends Component {
-  componentDidMount () {
+  componentDidMount() {
     return this.props.resetNewLogForm();
   }
 
   // TODO: resetDate should return the previous input date rather than today's date
   // TODO: allow user to enter and display weight in pounds
 
-  resetDate () {
+  resetDate() {
     const today = new Date();
-    this.props.inputLog({ key: 'date', val: today });
+    this.props.inputLog({ key: "date", val: today });
     return this.props.openModal(false);
   }
 
-  modal () {
+  modal() {
     const { modalActive, openModal, date, inputLog } = this.props;
     const {
-      modalViewStyle, modalButtonContainerStyle, datePickerStyle
+      modalViewStyle,
+      modalButtonContainerStyle,
+      datePickerStyle
     } = styles;
     return (
       <View>
         <ModalComponent
           visible={modalActive}
           transparent={true}
-          animationType={'slide'}
+          animationType={"slide"}
           onPress={() => openModal(false)}
-          >
+        >
           <ModalBar>
-            <ModalBarButton
-              title='Today'
-              onPress={() => this.resetDate()}
-            />
-            <ModalBarButton
-              title='Done'
-              onPress={() => openModal(false)}
-            />
+            <ModalBarButton title="Today" onPress={() => this.resetDate()} />
+            <ModalBarButton title="Done" onPress={() => openModal(false)} />
           </ModalBar>
           <ModalContent>
             <DatePickerIOS
               date={date}
-              mode='date'
-              onDateChange={val => inputLog({ key: 'date', val })}
+              mode="date"
+              onDateChange={val => inputLog({ key: "date", val })}
             />
           </ModalContent>
         </ModalComponent>
@@ -76,27 +72,29 @@ class NewLog extends Component {
     );
   }
 
-  onSubmit () {
+  onSubmit() {
     const {
-      createLog, exerciseId, date, rep, set, weight, note, uri
+      createLog,
+      exerciseId,
+      date,
+      rep,
+      set,
+      weight,
+      note,
+      uri
     } = this.props;
 
     createLog({ exerciseId, date, rep, set, weight, note, uri });
   }
 
-  renderButton () {
+  renderButton() {
     if (this.props.loading) {
-      return <Spinner />
+      return <Spinner />;
     }
-    return (
-      <ButtonPrimary
-        title='Submit'
-        onPress={() => this.onSubmit()}
-      />
-    );
+    return <ButtonPrimary title="Submit" onPress={() => this.onSubmit()} />;
   }
 
-  render () {
+  render() {
     const {
       exerciseName,
       openModal,
@@ -119,8 +117,10 @@ class NewLog extends Component {
             <View>
               <CardSection>
                 <FormField
-                  label='Date'
-                  value={`${moment(Date.parse(date)).format('ddd, MMMM Do YYYY')}`}
+                  label="Date"
+                  value={`${moment(Date.parse(date)).format(
+                    "ddd, MMMM Do YYYY"
+                  )}`}
                   editable={false}
                 />
               </CardSection>
@@ -128,51 +128,50 @@ class NewLog extends Component {
             </View>
           </TouchableWithoutFeedback>
 
-          <CardSection >
+          <CardSection>
             <FormField
-              label='Reps'
+              label="Reps"
               value={rep}
-              keyboardType='numeric'
-              onChangeText={val => inputLog({ key: 'rep', val})}
-            />
-          </CardSection>
-
-          <CardSection >
-            <FormField
-              label='Sets'
-              value={set}
-              keyboardType='numeric'
-              onChangeText={val => inputLog({ key: 'set', val})}
+              keyboardType="numeric"
+              onChangeText={val => inputLog({ key: "rep", val })}
             />
           </CardSection>
 
           <CardSection>
             <FormField
-              label='Weights'
+              label="Sets"
+              value={set}
+              keyboardType="numeric"
+              onChangeText={val => inputLog({ key: "set", val })}
+            />
+          </CardSection>
+
+          <CardSection>
+            <FormField
+              label="Weights"
               value={weight}
-              keyboardType='numeric'
-              onChangeText={val => inputLog({ key: 'weight', val})}
+              keyboardType="numeric"
+              onChangeText={val => inputLog({ key: "weight", val })}
             />
           </CardSection>
 
           <CardSection style={{ height: 125 }}>
             <FormField
-              label='Notes'
+              label="Notes"
               style={styles.noteStyle}
               value={note}
               autoCorrect={false}
               multiline={true}
               numberOfLines={4}
               maxLength={100}
-              onChangeText={val => inputLog({ key: 'note', val})}
+              onChangeText={val => inputLog({ key: "note", val })}
             />
           </CardSection>
 
           <PickImage>
-            {uri ? <ThumbnailPrimary source={{uri}} /> : <Text>{' '}</Text> }
+            {uri ? <ThumbnailPrimary source={{ uri }} /> : <Text> </Text>}
           </PickImage>
         </Card>
-
 
         <Container>
           <Content>
@@ -193,7 +192,7 @@ const styles = {
     paddingTop: 5,
     paddingBottom: 5
   }
-}
+};
 
 const mapStateToProps = state => {
   const {
@@ -207,7 +206,8 @@ const mapStateToProps = state => {
       note,
       uri,
       loading,
-      errorMessage }
+      errorMessage
+    }
   } = state;
   return {
     exerciseName: name,

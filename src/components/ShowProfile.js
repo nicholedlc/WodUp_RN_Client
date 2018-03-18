@@ -1,41 +1,55 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { connect } from 'react-redux';
-import { showProfileInfo } from '../actions';
-import { BaseContainer, SubHeader, Card, CardSection, Box, StatHeader, Stat, Avatar, Spinner, ErrorMessage, CoverPhoto } from './common';
-import { COLOR_SECONDARY, BACKGROUND_PRIMARY } from '../styles';
+import React, { Component } from "react";
+import { View, Text } from "react-native";
+import { connect } from "react-redux";
+import { showProfileInfo } from "../actions";
+import {
+  BaseContainer,
+  SubHeader,
+  Card,
+  CardSection,
+  Box,
+  StatHeader,
+  Stat,
+  Avatar,
+  Spinner,
+  ErrorMessage,
+  CoverPhoto
+} from "./common";
+import { COLOR_SECONDARY, BACKGROUND_PRIMARY } from "../styles";
 
 class ShowProfile extends Component {
-  componentDidMount () {
+  componentDidMount() {
     return this.props.showProfileInfo();
   }
 
-  render () {
+  render() {
     const { firstName, lastName, email, loading, errorMessage } = this.props;
     const { age, gender, weight, height } = this.props.profile || {};
-    const { cardSectionStyle, bannerStyle, viewStyle, nameStyle, emailStyle} = styles;
+    const {
+      cardSectionStyle,
+      bannerStyle,
+      viewStyle,
+      nameStyle,
+      emailStyle
+    } = styles;
     if (errorMessage) {
-      return <ErrorMessage />
+      return <ErrorMessage />;
     }
     if (loading) {
-      return <Spinner />
+      return <Spinner />;
     }
     return (
       <BaseContainer>
-        <CoverPhoto
-          source={require('../../assets/images/barbell-1.jpg')}
-        />
+        <CoverPhoto source={require("../../assets/images/barbell-1.jpg")} />
 
         <CardSection style={cardSectionStyle}>
           <Avatar
-            source={require('../../assets/images/profile-pic.jpg')}
+            source={require("../../assets/images/profile-pic.jpg")}
             // TODO: Add ability to upload profile pic
           />
           <View style={bannerStyle}>
             <View style={viewStyle}>
-              <Text style={nameStyle}>
-                {`${firstName} ${lastName}`}
-              </Text>
+              <Text style={nameStyle}>{`${firstName} ${lastName}`}</Text>
             </View>
             <View style={viewStyle}>
               <Text style={emailStyle}>{email}</Text>
@@ -76,21 +90,28 @@ const styles = {
     flex: 2
   },
   viewStyle: {
-    alignItems: 'flex-end'
+    alignItems: "flex-end"
   },
   nameStyle: {
     fontSize: 25,
     color: COLOR_SECONDARY
   },
   emailStyle: {
-    alignItems: 'flex-end',
-    color: '#696969'
+    alignItems: "flex-end",
+    color: "#696969"
   }
-}
+};
 
 const mapStateToProps = state => {
-  const { firstName, lastName, email, profile, errorMessage, loading } = state.showProfile;
+  const {
+    firstName,
+    lastName,
+    email,
+    profile,
+    errorMessage,
+    loading
+  } = state.showProfile;
   return { firstName, lastName, email, profile, loading, errorMessage };
-}
+};
 
 export default connect(mapStateToProps, { showProfileInfo })(ShowProfile);

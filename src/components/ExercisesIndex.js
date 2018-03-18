@@ -1,27 +1,34 @@
-import React, { Component } from 'react';
-import { ListView, Text } from 'react-native';
-import { connect } from 'react-redux';
-import { Container } from 'native-base';
-import { getExercises } from '../actions';
-import ExerciseItem from './ExerciseItem';
-import { BaseContainer, TopNav, CardSection, Spinner, ErrorMessage, BottomNav } from './common';
+import React, { Component } from "react";
+import { ListView, Text } from "react-native";
+import { connect } from "react-redux";
+import { Container } from "native-base";
+import { getExercises } from "../actions";
+import ExerciseItem from "./ExerciseItem";
+import {
+  BaseContainer,
+  TopNav,
+  CardSection,
+  Spinner,
+  ErrorMessage,
+  BottomNav
+} from "./common";
 
 class ExercisesIndex extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.getExercises();
   }
 
-  renderExercise (exercise) {
+  renderExercise(exercise) {
     return <ExerciseItem exercise={exercise} />;
   }
 
-  render () {
+  render() {
     const { exercises, errorMessage, loading } = this.props;
     if (errorMessage) {
-      return <ErrorMessage />
+      return <ErrorMessage />;
     }
     if (loading) {
-      return <Spinner />
+      return <Spinner />;
     }
     return (
       <Container>

@@ -2,8 +2,8 @@ import {
   EXERCISES_SUCCEEDED,
   EXERCISES_LOADING,
   EXERCISES_FAILED
-} from './types';
-import { Exercise } from '../fetches';
+} from "./types";
+import { Exercise } from "../fetches";
 
 const exercisesSucceeded = exercises => {
   return {
@@ -23,10 +23,10 @@ export const getExercises = () => {
   return dispatch => {
     dispatch({ type: EXERCISES_LOADING });
     return Exercise.getAll()
-      .then(({exercises}) => dispatch(exercisesSucceeded(exercises)))
+      .then(({ exercises }) => dispatch(exercisesSucceeded(exercises)))
       .catch(errorMessage => {
         console.error(errorMessage);
-        return dispatch(exercisesFailed(errorMessage))
+        return dispatch(exercisesFailed(errorMessage));
       });
   };
 };

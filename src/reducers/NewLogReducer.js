@@ -6,7 +6,7 @@ import {
   NEW_LOG_LOADING,
   NEW_LOG_FAILED,
   RESET_NEW_LOG_FORM
-} from '../actions/types';
+} from "../actions/types";
 
 const INITIAL_STATE = {
   modalActive: false,
@@ -18,26 +18,26 @@ const INITIAL_STATE = {
   imageUrl: null,
   uri: null,
   loading: false,
-  errorMessage: ''
+  errorMessage: ""
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case OPEN_MODAL:
-      return { ...state, modalActive: action.bool }
+      return { ...state, modalActive: action.bool };
     case INPUT_LOG:
       return { ...state, [action.payload.key]: action.payload.val };
     case PICK_IMAGE:
       return { ...state, uri: action.uri };
     case NEW_LOG_LOADING:
-      return { ...state, loading: true, errorMessage: '' }
+      return { ...state, loading: true, errorMessage: "" };
     case NEW_LOG_SUCCEEDED:
-      return { ...state, loading: false, errorMessage: '', ...action.log }
+      return { ...state, loading: false, errorMessage: "", ...action.log };
     case NEW_LOG_FAILED:
-      return { ...state, loading: false, errorMessage: action.errorMessage }
+      return { ...state, loading: false, errorMessage: action.errorMessage };
     case RESET_NEW_LOG_FORM:
-      return { ...state, ...INITIAL_STATE }
+      return { ...state, ...INITIAL_STATE };
     default:
       return state;
   }
-}
+};

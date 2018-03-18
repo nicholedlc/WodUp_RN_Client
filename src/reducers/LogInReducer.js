@@ -1,4 +1,9 @@
-import { INPUT_LOGIN, RESET_LOGIN_FORM, LOGIN_SUCCEEDED, LOGIN_LOADING } from '../actions/types';
+import {
+  INPUT_LOGIN,
+  RESET_LOGIN_FORM,
+  LOGIN_SUCCEEDED,
+  LOGIN_LOADING
+} from "../actions/types";
 
 const INITIAL_STATE = {
   email: null,
@@ -10,14 +15,14 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case INPUT_LOGIN:
-      return { ...state, [action.payload.key]: action.payload.value }
+      return { ...state, [action.payload.key]: action.payload.value };
     case RESET_LOGIN_FORM:
-      return { ...state, email: null, password: null }
+      return { ...state, email: null, password: null };
     case LOGIN_SUCCEEDED:
-      return { ...state, ...action.user, loading: false }
+      return { ...state, ...action.user, loading: false };
     case LOGIN_LOADING:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     default:
-      return state
-  };
+      return state;
+  }
 };

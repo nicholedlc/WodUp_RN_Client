@@ -1,6 +1,6 @@
-import React from 'react';
-import { Thumbnail } from 'native-base';
-import { BORDER_RADIUS } from '../../styles';
+import React from "react";
+import { Thumbnail } from "native-base";
+import { BORDER_RADIUS } from "../../styles";
 
 const ThumbnailPrimary = props => {
   return (
@@ -11,12 +11,12 @@ const ThumbnailPrimary = props => {
       square
     />
   );
-}
+};
 
 const styles = {
   thumbnailStyle: {
     borderRadius: BORDER_RADIUS
   }
-}
+};
 
 export { ThumbnailPrimary };

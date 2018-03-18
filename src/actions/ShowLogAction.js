@@ -1,4 +1,4 @@
-import { SHOW_LOG_INFO } from './types';
+import { SHOW_LOG_INFO } from "./types";
 
 export const showLogInfo = id => {
   return {
