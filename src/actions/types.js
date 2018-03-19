@@ -37,3 +37,5 @@ export const INPUT_USER = "INPUT_USER";
 export const SIGNUP_LOADING = "SIGNUP_LOADING";
 export const SIGNUP_SUCCEEDED = "SIGNUP_SUCCEEDED";
 export const RESET_SIGNUP_FORM = "RESET_SIGNUP_FORM";
+
+export const LOGOUT = "LOGOUT";

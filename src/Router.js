@@ -1,6 +1,8 @@
 import React from "react";
 import { Scene, Router, Actions, ActionConst } from "react-native-router-flux";
+import { AsyncStorage } from "react-native";
 import { Icon } from "native-base";
+import { store } from "./store";
 import {
   NAV_HEIGHT,
   BACKGROUND_PRIMARY,
@@ -15,8 +17,7 @@ import NewLog from "./components/NewLog";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import ShowProfile from "./components/ShowProfile";
-
-// TODO: debug back button
+import { LOGOUT } from "./actions/types";
 
 const RouterComponent = () => {
   const {
@@ -51,7 +52,16 @@ const RouterComponent = () => {
         />
       </Scene>
       <Scene key="userProfile" type={ActionConst.RESET}>
-        <Scene key="showProfile" component={ShowProfile} />
+        <Scene
+          key="showProfile"
+          component={ShowProfile}
+          rightTitle="Log Out"
+          onRight={async () => {
+            await AsyncStorage.removeItem('JWT')
+            store.dispatch({ type: LOGOUT })
+            Actions.auth();
+          }}
+        />
       </Scene>
       <Scene key="main" type={ActionConst.RESET}>
         <Scene

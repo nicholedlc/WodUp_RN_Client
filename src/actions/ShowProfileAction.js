@@ -4,7 +4,7 @@ import { User } from "../fetches";
 const profileSucceeded = profile => {
   return {
     type: PROFILE_SUCCEEDED,
-    profile //: {profile: null, firstName: "Nichole", lastName: "De La Cruz", email: "ndlc@gmail.com"}
+    profile
   };
 };
 
@@ -20,7 +20,6 @@ export const showProfileInfo = () => {
     dispatch({ type: PROFILE_LOADING });
     return User.getProfile()
       .then(profile => {
-        // {profile: null, firstName: "Nichole", lastName: "De La Cruz", email: "ndlc@gmail.com"}
         dispatch(profileSucceeded(profile));
       })
       .catch(errorMessage => {

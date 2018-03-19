@@ -2,7 +2,8 @@ import {
   INPUT_LOGIN,
   RESET_LOGIN_FORM,
   LOGIN_SUCCEEDED,
-  LOGIN_LOADING
+  LOGIN_LOADING,
+  LOGOUT
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -22,6 +23,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, ...action.user, loading: false };
     case LOGIN_LOADING:
       return { ...state, loading: true };
+    case LOGOUT:
+      return { ...state, ...INITIAL_STATE }
     default:
       return state;
   }

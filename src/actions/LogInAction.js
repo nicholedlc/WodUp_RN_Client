@@ -5,7 +5,8 @@ import {
   RESET_LOGIN_FORM,
   SUBMIT_LOGIN,
   LOGIN_LOADING,
-  LOGIN_SUCCEEDED
+  LOGIN_SUCCEEDED,
+  LOGOUT
 } from "./types";
 import { User } from "../fetches";
 
@@ -18,6 +19,10 @@ export const inputLogIn = ({ key, value }) => {
 
 export const resetLogInForm = () => {
   return { type: RESET_LOGIN_FORM };
+};
+
+export const logout = () => {
+  return { type: LOGOUT };
 };
 
 const logInSucceeded = user => {

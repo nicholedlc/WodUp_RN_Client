@@ -4,12 +4,10 @@ import { Provider } from "react-redux";
 import { Container } from "native-base";
 
 import Router from "./Router";
-import configureStore from "./store/configureStore";
 import ExercisesIndex from "./components/ExercisesIndex";
 import { BottomNav } from "./components/common/BottomNav";
 import { AsyncStorage } from "react-native";
-
-const store = configureStore(); // can also pass an initial state here
+import { store } from "./store"
 
 const App = () => {
   return (

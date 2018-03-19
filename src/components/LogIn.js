@@ -19,7 +19,6 @@ import { inputLogIn, resetLogInForm, submitLogIn, loading } from "../actions";
 class LogIn extends Component {
   componentDidMount() {
     AsyncStorage.getItem("JWT")
-      // .then(token => AsyncStorage.removeItem('JWT'))
       .then(
         token => {
           if (token) {
@@ -61,8 +60,8 @@ class LogIn extends Component {
               returnKeyType="next"
               value={email}
               onChangeText={value => inputLogIn({ key: "email", value })}
-              // blurOnSubmit={false}
-              // onSubmitEditing={() => this.focusNextField('2')}
+            // blurOnSubmit={false}
+            // onSubmitEditing={() => this.focusNextField('2')}
             />
           </CardSection>
 

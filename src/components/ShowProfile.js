@@ -45,7 +45,7 @@ class ShowProfile extends Component {
         <CardSection style={cardSectionStyle}>
           <Avatar
             source={require("../../assets/images/profile-pic.jpg")}
-            // TODO: Add ability to upload profile pic
+          // TODO: Add ability to upload profile pic
           />
           <View style={bannerStyle}>
             <View style={viewStyle}>
@@ -110,7 +110,7 @@ const mapStateToProps = state => {
     profile,
     errorMessage,
     loading
-  } = state.showProfile;
+  } = state.showProfile.profile;
   return { firstName, lastName, email, profile, loading, errorMessage };
 };
 
